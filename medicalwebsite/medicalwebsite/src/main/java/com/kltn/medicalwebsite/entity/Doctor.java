@@ -24,9 +24,9 @@ public class Doctor {
     @JoinColumn(name = "id_speciality",referencedColumnName = "id")
     private  Speciality speciality;
 
-    @Enumerated(EnumType.STRING)
-    private  WorkDay workDay;
 
+
+    @Column(columnDefinition = "text")
     private  String description;
     private LocalDateTime datetime;
 
@@ -40,18 +40,17 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.REMOVE)
     private  List<Review> reviews;
 
-
     public Doctor() {
     }
 
-    public Doctor(Long id, String imagePath, Client client, Speciality speciality, WorkDay workDay, String description, LocalDateTime datetime) {
+    public Doctor(Long id, String imagePath, Client client, Speciality speciality, String description, LocalDateTime datetime, List<ConsultationSchedule> consultationSchedules, List<MedicalRecord> medicalRecords, List<Review> reviews) {
         this.id = id;
         this.imagePath = imagePath;
         this.client = client;
         this.speciality = speciality;
-        this.workDay = workDay;
         this.description = description;
         this.datetime = datetime;
+
     }
 
     public Long getId() {
@@ -86,13 +85,7 @@ public class Doctor {
         this.speciality = speciality;
     }
 
-    public WorkDay getWorkDay() {
-        return workDay;
-    }
 
-    public void setWorkDay(WorkDay workDay) {
-        this.workDay = workDay;
-    }
 
     public String getDescription() {
         return description;
@@ -109,4 +102,5 @@ public class Doctor {
     public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
+
 }

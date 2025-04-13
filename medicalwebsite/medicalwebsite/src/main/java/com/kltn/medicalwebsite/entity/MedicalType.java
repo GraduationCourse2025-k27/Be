@@ -16,8 +16,7 @@ public class MedicalType {
     @Column(columnDefinition = "varchar(120)")
     private  String nameService;
 
-    @Enumerated(EnumType.STRING)
-    private  WorkDay workDay;
+
 
 
     private LocalDateTime createAt;
@@ -29,10 +28,9 @@ public class MedicalType {
     public MedicalType() {
     }
 
-    public MedicalType(Long id, String nameService, WorkDay workDay, LocalDateTime createAt) {
+    public MedicalType(Long id, String nameService, LocalDateTime createAt) {
         this.id = id;
         this.nameService = nameService;
-        this.workDay = workDay;
         this.createAt = createAt;
     }
 
@@ -52,13 +50,6 @@ public class MedicalType {
         this.nameService = nameService;
     }
 
-    public WorkDay getWorkDay() {
-        return workDay;
-    }
-
-    public void setWorkDay(WorkDay workDay) {
-        this.workDay = workDay;
-    }
 
     public LocalDateTime getCreateAt() {
         return createAt;

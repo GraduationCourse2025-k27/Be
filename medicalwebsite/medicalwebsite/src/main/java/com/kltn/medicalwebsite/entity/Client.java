@@ -31,6 +31,8 @@ public class Client {
     @Column(columnDefinition = "varchar(50)")
     private  String role;
 
+    private  Boolean isClock;
+
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "client",cascade = CascadeType.REMOVE)
@@ -110,7 +112,15 @@ public class Client {
         this.createdAt = createdAt;
     }
 
-    public Client(Long id, String fullName, String email, String phone, String address, String password, String role, LocalDateTime createdAt) {
+    public Boolean getClock() {
+        return isClock;
+    }
+
+    public void setClock(Boolean clock) {
+        isClock = clock;
+    }
+
+    public Client(Long id, String fullName, String email, String phone, String address, String password, String role, Boolean isClock, LocalDateTime createdAt) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -118,6 +128,7 @@ public class Client {
         this.address = address;
         this.password = password;
         this.role = role;
+        this.isClock = isClock;
         this.createdAt = createdAt;
     }
     public  Client(){}

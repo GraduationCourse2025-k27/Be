@@ -36,6 +36,7 @@ public class ClientServiceImlp  implements  ClientService{
         newClient.setPassword(client.getPassword());
         newClient.setRole("ROLE_USER");
         newClient.setCreatedAt(LocalDateTime.now());
+        newClient.setClock(false);
         return repository.save(newClient);
     }
 

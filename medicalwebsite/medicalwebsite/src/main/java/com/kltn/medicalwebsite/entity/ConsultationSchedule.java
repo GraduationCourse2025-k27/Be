@@ -1,5 +1,6 @@
 package com.kltn.medicalwebsite.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ public class ConsultationSchedule {
 
     @ManyToOne
     @JoinColumn(name = "id_doctor",referencedColumnName = "id")
+    @JsonBackReference
     private  Doctor doctor;
 
     @ManyToOne

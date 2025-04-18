@@ -3,6 +3,7 @@ package com.kltn.medicalwebsite.controller;
 
 import com.kltn.medicalwebsite.entity.ConsultationSchedule;
 import com.kltn.medicalwebsite.request.TimeSlotRequest;
+import com.kltn.medicalwebsite.request.UpdateScheduleRequest;
 import com.kltn.medicalwebsite.service.ConsultationScheduleService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,13 @@ public class ConsultationScheduleController {
         }else {
             return  new ResponseEntity<>(schedules,HttpStatus.OK);
         }
+    }
+
+    @PutMapping("/update/{scheduleId}")
+    public ResponseEntity<String> updateSchedule(@PathVariable("scheduleId")Long scheduleId,
+                                                 @RequestBody UpdateScheduleRequest updateScheduleRequest){
+           consultationScheduleService.updateTimeSlot(scheduleId,updateScheduleRequest);
+
+           return  ResponseEntity.ok("Cập nhật khung giờ thành công");
     }
 }

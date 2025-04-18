@@ -1,6 +1,7 @@
 package com.kltn.medicalwebsite.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -24,6 +25,8 @@ public class Doctor {
     @JoinColumn(name = "id_speciality",referencedColumnName = "id")
     private  Speciality speciality;
 
+    private  Double examinationPrice;
+
 
 
     @Column(columnDefinition = "text")
@@ -31,6 +34,8 @@ public class Doctor {
     private LocalDateTime datetime;
 
 
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.REMOVE)
     private List<ConsultationSchedule> consultationSchedules;
 
@@ -40,17 +45,18 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.REMOVE)
     private  List<Review> reviews;
 
+
     public Doctor() {
     }
 
-    public Doctor(Long id, String imagePath, Client client, Speciality speciality, String description, LocalDateTime datetime, List<ConsultationSchedule> consultationSchedules, List<MedicalRecord> medicalRecords, List<Review> reviews) {
+    public Doctor(Long id, String imagePath, Client client, Speciality speciality, String description, LocalDateTime datetime, List<ConsultationSchedule> consultationSchedules, List<MedicalRecord> medicalRecords, List<Review> reviews, Double examinationPrice) {
         this.id = id;
         this.imagePath = imagePath;
         this.client = client;
         this.speciality = speciality;
         this.description = description;
         this.datetime = datetime;
-
+        this.examinationPrice = examinationPrice;
     }
 
     public Long getId() {
@@ -103,4 +109,11 @@ public class Doctor {
         this.datetime = datetime;
     }
 
+    public Double getExaminationPrice() {
+        return examinationPrice;
+    }
+
+    public void setExaminationPrice(Double examinationPrice) {
+        this.examinationPrice = examinationPrice;
+    }
 }

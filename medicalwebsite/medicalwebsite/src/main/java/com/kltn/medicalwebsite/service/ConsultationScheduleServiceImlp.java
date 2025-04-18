@@ -3,10 +3,12 @@ package com.kltn.medicalwebsite.service;
 
 import com.kltn.medicalwebsite.entity.ConsultationSchedule;
 import com.kltn.medicalwebsite.entity.Doctor;
+import com.kltn.medicalwebsite.exception.ConsultationException;
 import com.kltn.medicalwebsite.exception.DoctorException;
 import com.kltn.medicalwebsite.repository.ConsultationScheduleRepository;
 import com.kltn.medicalwebsite.repository.DoctorRepository;
 import com.kltn.medicalwebsite.request.TimeSlotRequest;
+import com.kltn.medicalwebsite.request.UpdateScheduleRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -59,7 +61,14 @@ public class ConsultationScheduleServiceImlp implements ConsultationScheduleServ
     }
 
     @Override
-    public void updateTimeSlot(Long consultationSchedule, TimeSlotRequest timeSlotRequest,LocalDate workDate) {
+    public void updateTimeSlot(Long consultationSchedule, UpdateScheduleRequest timeSlotRequest) {
+
+        ConsultationSchedule schedule = consultationScheduleRepository.findById(consultationSchedule).orElseThrow(() -> new ConsultationException("Schedule not found with id:"+consultationSchedule));
+
+        schedule.setDateAppointment(timeSlotRequest.getDateAppointment());
+        schedule.setStartTime(timeSlotRequest.getStartTime());
+        schedule.setEndTime(timeSlotRequest.getEndTime());
+        consultationScheduleRepository.save(schedule);
 
     }
 

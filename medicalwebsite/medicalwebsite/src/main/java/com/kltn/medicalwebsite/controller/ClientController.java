@@ -57,6 +57,17 @@ public class ClientController {
         return  new ResponseEntity<>(client,HttpStatus.OK);
     }
 
+    @GetMapping("/valid/email")
+    public  ResponseEntity<?> validEmailExisting(@RequestParam("email") String email){
+        List<Client> clients = clientService.findALl();
+        for (Client client : clients){
+            if(client.getEmail().equals(email)){
+                return  new ResponseEntity<>(HttpStatus.OK);
+            }
+        }
+        return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 
 
 }

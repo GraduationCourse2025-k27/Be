@@ -5,16 +5,16 @@ public class DoctorCreate {
     private String imagePath;
     private  Long client;
     private  Long speciality;
-    private  String workDay;
     private  String description;
+    private  Double price;
 
 
-    public DoctorCreate(String imagePath, Long client, Long speciality, String workDay, String description) {
+    public DoctorCreate(String imagePath, Long client, Long speciality, String workDay, String description, Double price) {
         this.imagePath = imagePath;
         this.client = client;
         this.speciality = speciality;
-        this.workDay = workDay;
         this.description = description;
+        this.price = price;
     }
 
     public DoctorCreate() {
@@ -44,13 +44,8 @@ public class DoctorCreate {
         this.speciality = speciality;
     }
 
-    public String getWorkDay() {
-        return workDay;
-    }
 
-    public void setWorkDay(String workDay) {
-        this.workDay = workDay;
-    }
+
 
     public String getDescription() {
         return description;
@@ -58,5 +53,14 @@ public class DoctorCreate {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

@@ -57,6 +57,7 @@ public class DoctorServiceImlp implements  DoctorService{
             newDoctor.setDatetime(LocalDateTime.now());
             newDoctor.setImagePath(doctor.getImagePath());
             newDoctor.setDescription(doctor.getDescription());
+            newDoctor.setExaminationPrice(doctor.getPrice());
             clientRepository.save(updateClient);
             return  doctorRepository.save(newDoctor);
        }else {

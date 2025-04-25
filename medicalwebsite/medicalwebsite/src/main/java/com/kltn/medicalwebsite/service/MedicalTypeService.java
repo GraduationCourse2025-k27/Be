@@ -12,6 +12,8 @@ public interface MedicalTypeService {
 
     List<MedicalType> getAllMedicalType();
 
+    List<MedicalType> findMedicalTypeByNameService(String nameService);
+
 
     void delete(Long id);
 

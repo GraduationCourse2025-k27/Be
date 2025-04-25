@@ -22,6 +22,7 @@ public class ConsultationSchedule {
 
     @ManyToOne
     @JoinColumn(name = "id_medicalservice",referencedColumnName = "id")
+    @JsonBackReference(value = "medical-type-services")
     private  MedicalType medicalType;
 
     private LocalDate dateAppointment;

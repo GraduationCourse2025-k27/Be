@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MedicalTypeServiceImlp implements  MedicalTypeService{
@@ -30,6 +31,9 @@ public class MedicalTypeServiceImlp implements  MedicalTypeService{
         MedicalType existingMedicalType = medicalTypeRepository.findById(id).orElseThrow(() -> new MedicalTypeException("Medical Type not found with id:"+id));
         existingMedicalType.setNameService(medicalType.getNameService());
         existingMedicalType.setCreateAt(LocalDateTime.now());
+        existingMedicalType.setPrice(medicalType.getPrice());
+        existingMedicalType.setImagePath(medicalType.getImagePath());
+        existingMedicalType.setDescription(medicalType.getDescription());
         return medicalTypeRepository.save(existingMedicalType);
     }
 
@@ -42,6 +46,32 @@ public class MedicalTypeServiceImlp implements  MedicalTypeService{
     @Override
     public List<MedicalType> getAllMedicalType() {
         return medicalTypeRepository.findAll();
+    }
+
+    @Override
+    public List<MedicalType> findMedicalTypeByNameService(String nameService) {
+        List<MedicalType> medicalTypes = medicalTypeRepository.findAll();
+        if("tongquat".contains(nameService)){
+            medicalTypes =medicalTypes.stream().filter(medicalType -> medicalType.getNameService().contains("Tổng quát")).collect(Collectors.toList());
+            return  medicalTypes;
+        }
+        if("xetnghiem".contains(nameService)){
+            medicalTypes =medicalTypes.stream().filter(medicalType -> medicalType.getNameService().contains("Xét nghiệm")).collect(Collectors.toList());
+            return  medicalTypes;
+        }
+        if("phauthuat".contains(nameService)){
+            medicalTypes =medicalTypes.stream().filter(medicalType -> medicalType.getNameService().contains("Phẫu Thuật")).collect(Collectors.toList());
+            return  medicalTypes;
+        }
+        if("sieuam".contains(nameService)){
+            medicalTypes =medicalTypes.stream().filter(medicalType -> medicalType.getNameService().contains("Siêu âm")).collect(Collectors.toList());
+            return  medicalTypes;
+        }
+        if("ungthu".contains(nameService)){
+            medicalTypes =medicalTypes.stream().filter(medicalType -> medicalType.getNameService().contains("Ung thư")).collect(Collectors.toList());
+            return  medicalTypes;
+        }
+        return null;
     }
 
     @Override

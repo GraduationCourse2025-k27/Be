@@ -1,5 +1,6 @@
 package com.kltn.medicalwebsite.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -27,18 +28,17 @@ public class MedicalType {
 
 
     @OneToMany(mappedBy = "medicalType",cascade = CascadeType.REMOVE)
+    @JsonManagedReference(value = "medical-type-services")
     private List<ConsultationSchedule> consultationSchedules;
 
-    public MedicalType(String imagePath, Double price) {
-        this.imagePath = imagePath;
-        this.price = price;
+    public MedicalType() {
     }
 
-    public MedicalType(Long id, String nameService, LocalDateTime createAt, Integer flagMedicalType, String imagePath, Double price, String description) {
+    public MedicalType(Long id, String imagePath, String nameService, LocalDateTime createAt, Double price, String description) {
         this.id = id;
+        this.imagePath = imagePath;
         this.nameService = nameService;
         this.createAt = createAt;
-        this.imagePath = imagePath;
         this.price = price;
         this.description = description;
     }

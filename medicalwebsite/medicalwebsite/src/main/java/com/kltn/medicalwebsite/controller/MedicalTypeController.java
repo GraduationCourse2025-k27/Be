@@ -49,4 +49,14 @@ public class MedicalTypeController {
         medicalTypeService.delete(id);
         return  ResponseEntity.ok("Xóa thành công with id :"+id);
     }
+
+    @GetMapping("/search/list")
+    public  ResponseEntity<?> findMedicalTypeByNameService (@RequestParam("medicalType") String medicalType){
+        List<MedicalType> medicalTypes = medicalTypeService.findMedicalTypeByNameService(medicalType);
+        if(medicalTypes.isEmpty()){
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            return  new ResponseEntity<>(medicalTypes,HttpStatus.OK);
+        }
+    }
 }

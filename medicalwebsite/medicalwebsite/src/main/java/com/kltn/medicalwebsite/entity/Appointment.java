@@ -2,6 +2,7 @@ package com.kltn.medicalwebsite.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -17,10 +18,8 @@ public class Appointment {
       private  String gender;
       private  String issueDescription;
       private  String status;
-      private  String timeSlot;
-      private  String dateAppointment;
+      private LocalDate dateAppointment;
       private  String birthDate;
-
 
 
       @OneToMany(mappedBy = "appointment",cascade = CascadeType.REMOVE)
@@ -28,14 +27,12 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "id_consulationSchedule",referencedColumnName = "id")
     private ConsultationSchedule consulationSchedule;
-    public Appointment(String timeSlot) {
-        this.timeSlot = timeSlot;
-    }
+
 
     public Appointment() {
     }
 
-    public Appointment(Long id, String fullName, String email, String phone, String address, String gender, String issueDescription, String status, String timeSlot, String dateAppointment, String birthDate, Doctor doctor, MedicalType medicalType, ConsultationSchedule consulationSchedule) {
+    public Appointment(Long id, String fullName, String email, String phone, String address, String gender, String issueDescription, String status, String timeSlot, LocalDate dateAppointment, String birthDate, Doctor doctor, MedicalType medicalType, ConsultationSchedule consulationSchedule) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -44,7 +41,6 @@ public class Appointment {
         this.gender = gender;
         this.issueDescription = issueDescription;
         this.status = status;
-        this.timeSlot = timeSlot;
         this.dateAppointment = dateAppointment;
         this.birthDate = birthDate;
 
@@ -117,13 +113,8 @@ public class Appointment {
         this.status = status;
     }
 
-    public String getTimeSlot() {
-        return timeSlot;
-    }
 
-    public void setTimeSlot(String timeSlot) {
-        this.timeSlot = timeSlot;
-    }
+
 
 
     public String getBirthDate() {
@@ -134,11 +125,11 @@ public class Appointment {
         this.birthDate = birthDate;
     }
 
-    public String getDateAppointment() {
+    public LocalDate getDateAppointment() {
         return dateAppointment;
     }
 
-    public void setDateAppointment(String dateAppointment) {
+    public void setDateAppointment(LocalDate dateAppointment) {
         this.dateAppointment = dateAppointment;
     }
 

@@ -1,8 +1,10 @@
 package com.kltn.medicalwebsite.controller;
 
 
+import com.kltn.medicalwebsite.entity.Appointment;
 import com.kltn.medicalwebsite.request.AppointmentRequest;
 import com.kltn.medicalwebsite.service.AppointmentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +22,13 @@ public class AppointmentController {
     @PostMapping("/reserve")
     public ResponseEntity<?> reserveAppointment(@RequestParam("ScheduleId") Long scheduleId,
                                                 @RequestBody AppointmentRequest appointmentRequest) {
-//        appointmentService.bookAppointment(doctorId, medicalTypeId, appointmentRequest);
-        return ResponseEntity.ok("Dat lich thanh cong");
+        Appointment appointment =  appointmentService.bookAppointment(scheduleId, appointmentRequest);
+        return new ResponseEntity<>(appointment,HttpStatus.OK);
+    }
+
+    @GetMapping("/appointment/{id}")
+    public  ResponseEntity<Appointment> findAppointmentById(@PathVariable("id") Long id){
+         Appointment appointment = appointmentService.findAppointmentById(id);
+         return  new ResponseEntity<>(appointment, HttpStatus.OK);
     }
 }

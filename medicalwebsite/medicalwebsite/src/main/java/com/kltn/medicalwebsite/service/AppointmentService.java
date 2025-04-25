@@ -1,8 +1,11 @@
 package com.kltn.medicalwebsite.service;
 
+import com.kltn.medicalwebsite.entity.Appointment;
 import com.kltn.medicalwebsite.request.AppointmentRequest;
 
 public interface AppointmentService {
 
-    void bookAppointment(Long ShceduleId, AppointmentRequest appointmentRequest);
+    Appointment bookAppointment(Long ShceduleId, AppointmentRequest appointmentRequest);
+
+    Appointment findAppointmentById(Long appointmentId);
 }

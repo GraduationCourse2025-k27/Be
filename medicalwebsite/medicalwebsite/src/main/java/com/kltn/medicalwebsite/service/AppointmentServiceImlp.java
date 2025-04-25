@@ -1,16 +1,20 @@
 package com.kltn.medicalwebsite.service;
 
 import com.kltn.medicalwebsite.entity.Appointment;
+import com.kltn.medicalwebsite.entity.ConsultationSchedule;
 import com.kltn.medicalwebsite.entity.Doctor;
 import com.kltn.medicalwebsite.entity.MedicalType;
 import com.kltn.medicalwebsite.exception.AppointmentException;
+import com.kltn.medicalwebsite.exception.ConsultationException;
 import com.kltn.medicalwebsite.exception.DoctorException;
 import com.kltn.medicalwebsite.repository.AppointmentRepository;
+import com.kltn.medicalwebsite.repository.ConsultationScheduleRepository;
 import com.kltn.medicalwebsite.repository.DoctorRepository;
 import com.kltn.medicalwebsite.repository.MedicalTypeRepository;
 import com.kltn.medicalwebsite.request.AppointmentRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -19,51 +23,43 @@ import java.util.Optional;
 public class AppointmentServiceImlp implements  AppointmentService{
 
     private AppointmentRepository appointmentRepository;
-    private DoctorRepository doctorRepository;
-    private MedicalTypeRepository medicalTypeRepository;
 
-    public AppointmentServiceImlp(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository, MedicalTypeRepository medicalTypeRepository) {
+    private ConsultationScheduleRepository consultationScheduleRepository;
+    public AppointmentServiceImlp(AppointmentRepository appointmentRepository, ConsultationScheduleRepository consultationScheduleRepository) {
         this.appointmentRepository = appointmentRepository;
-        this.doctorRepository = doctorRepository;
-        this.medicalTypeRepository = medicalTypeRepository;
+
+        this.consultationScheduleRepository = consultationScheduleRepository;
+    }
+    @Override
+    public Appointment bookAppointment(Long ScheduleId, AppointmentRequest appointmentRequest) {
+        ConsultationSchedule consultationSchedule = consultationScheduleRepository.findById(ScheduleId).orElseThrow(() -> new ConsultationException("Schedule not found with id :"+ScheduleId));
+
+        Appointment appointment = mapAppointmentRequestToAppointment(appointmentRequest);
+        appointment.setConsulationSchedule(consultationSchedule);
+        appointment.setDateAppointment(LocalDate.now());
+        appointment.setStatus("PENDING");
+        consultationSchedule.setBooked(true);
+        consultationScheduleRepository.save(consultationSchedule);
+        return appointmentRepository.save(appointment);
     }
 
     @Override
-    public void bookAppointment(Long ScheduleId, AppointmentRequest appointmentRequest) {
-//        // Kiểm tra xem có ít nhất một trong hai ID tồn tại
-//        if (doctorId == null && medicalTypeId == null) {
-//            throw new AppointmentException("At least one of doctorId or medicalTypeId must be provided");
-//        }
-//        // Tìm Doctor và MedicalType
-//        Optional<Doctor> existingDoctor = doctorId != null ? doctorRepository.findById(doctorId) : Optional.empty();
-//        Optional<MedicalType> existingMedicalType = medicalTypeId != null ? medicalTypeRepository.findById(medicalTypeId) : Optional.empty();
-//
-//        // Kiểm tra xem có ít nhất một trong hai tồn tại
-//        if (existingDoctor.isEmpty() && existingMedicalType.isEmpty()) {
-//            throw new AppointmentException("Neither doctor nor medical type found");
-//        }
-//        // Tạo và gán thông tin cho Appointment
-//        Appointment appointment = new Appointment();
-//        mapAppointmentRequestToAppointment(appointment, appointmentRequest);
-//        // Gán Doctor nếu có
-//        existingDoctor.ifPresent(appointment::setDoctor);
-//
-//        // Gán MedicalType nếu có
-//        existingMedicalType.ifPresent(appointment::setMedicalType);
-//
-//        // Lưu Appointment
-//         appointment.setStatus("PENDING");
-//        appointmentRepository.save(appointment);
+    public Appointment findAppointmentById(Long appointmentId) {
+        Appointment appointment = appointmentRepository.findById(appointmentId).orElseThrow(() -> new AppointmentException("Appointment not found with id :"+appointmentId));
+        return appointment;
     }
-    private void mapAppointmentRequestToAppointment(Appointment appointment, AppointmentRequest request) {
+
+    private Appointment mapAppointmentRequestToAppointment( AppointmentRequest request) {
+         Appointment appointment = new Appointment();
         appointment.setAddress(request.getAddress());
         appointment.setFullName(request.getFullName());
-        appointment.setTimeSlot(request.getTimeSlot());
         appointment.setGender(request.getGender());
         appointment.setPhone(request.getPhone());
         appointment.setIssueDescription(request.getIssueDescription());
         appointment.setEmail(request.getEmail());
-        appointment.setDateAppointment(request.getDateAppointment());
         appointment.setBirthDate(request.getBirthDate());
+        return  appointment;
     }
+
+
 }

@@ -6,6 +6,7 @@ import com.kltn.medicalwebsite.request.DoctorCreate;
 import com.kltn.medicalwebsite.request.DoctorRequest;
 import com.kltn.medicalwebsite.service.ConsultationScheduleService;
 import com.kltn.medicalwebsite.service.DoctorService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class DoctorController {
         }
     }
     @PostMapping("/create")
+    @Transactional
     public  ResponseEntity<Doctor> create(@RequestBody DoctorCreate doctor){
         Doctor newDoctor = doctorService.create(doctor);
         consultationScheduleService.createTimeSlot(newDoctor.getId());

@@ -3,9 +3,13 @@ package com.kltn.medicalwebsite.service;
 
 import com.kltn.medicalwebsite.entity.ConsultationSchedule;
 import com.kltn.medicalwebsite.entity.Doctor;
+import com.kltn.medicalwebsite.entity.MedicalType;
 import com.kltn.medicalwebsite.exception.DoctorException;
+import com.kltn.medicalwebsite.exception.MedicalTypeException;
 import com.kltn.medicalwebsite.repository.ConsultationScheduleRepository;
 import com.kltn.medicalwebsite.repository.DoctorRepository;
+import com.kltn.medicalwebsite.repository.MedicalTypeRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +30,7 @@ public class ConsultationScheduleServiceImlp implements ConsultationScheduleServ
     }
 
     @Override
+    @Transactional
     public void createTimeSlot(Long doctorId) {
         Doctor doctor = doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new DoctorException("Doctor not found: " + doctorId));
@@ -74,6 +79,7 @@ public class ConsultationScheduleServiceImlp implements ConsultationScheduleServ
     }
 
     @Override
+    @Transactional
     @Scheduled(cron = "0 0 0 * * ?") // Chạy lúc 0:00 mỗi ngày
     public void updateTimeSlotsForAllDoctors() {
         List<Doctor> doctors = doctorRepository.findAll();
@@ -81,4 +87,5 @@ public class ConsultationScheduleServiceImlp implements ConsultationScheduleServ
             createTimeSlot(doctor.getId());
         }
     }
+
 }

@@ -21,16 +21,15 @@ public class ConsultationScheduleController {
 
 
     private ConsultationScheduleService consultationScheduleService;
-    private ConsultationScheduleRepository consultationScheduleRepository;
 
-    public ConsultationScheduleController(ConsultationScheduleService consultationScheduleService, ConsultationScheduleRepository consultationScheduleRepository) {
+    public ConsultationScheduleController(ConsultationScheduleService consultationScheduleService) {
         this.consultationScheduleService = consultationScheduleService;
-        this.consultationScheduleRepository = consultationScheduleRepository;
     }
     @PostMapping("/create-time-slots/{doctorId}")
     public ResponseEntity<?> createTimeSlots(@PathVariable Long doctorId) {
         consultationScheduleService.createTimeSlot(doctorId);
         return ResponseEntity.ok("Time slots created successfully");
     }
+
 
 }

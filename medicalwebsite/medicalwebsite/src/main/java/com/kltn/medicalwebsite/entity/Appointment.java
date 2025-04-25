@@ -10,10 +10,6 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-      @ManyToOne
-      @JoinColumn(name = "id_consulationSchedule",referencedColumnName = "id")
-    private ConsultationSchedule consulationSchedule;
-
       private  String fullName;
       private  String email;
       private  String phone;
@@ -21,17 +17,26 @@ public class Appointment {
       private  String gender;
       private  String issueDescription;
       private  String status;
+      private  String timeSlot;
+      private  String dateAppointment;
+      private  String birthDate;
+
 
 
       @OneToMany(mappedBy = "appointment",cascade = CascadeType.REMOVE)
       private List<Payment> payments;
+    @ManyToOne
+    @JoinColumn(name = "id_consulationSchedule",referencedColumnName = "id")
+    private ConsultationSchedule consulationSchedule;
+    public Appointment(String timeSlot) {
+        this.timeSlot = timeSlot;
+    }
 
     public Appointment() {
     }
 
-    public Appointment(Long id, ConsultationSchedule consulationSchedule, String fullName, String email, String phone, String address, String gender, String issueDescription, String status) {
+    public Appointment(Long id, String fullName, String email, String phone, String address, String gender, String issueDescription, String status, String timeSlot, String dateAppointment, String birthDate, Doctor doctor, MedicalType medicalType, ConsultationSchedule consulationSchedule) {
         this.id = id;
-        this.consulationSchedule = consulationSchedule;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
@@ -39,6 +44,11 @@ public class Appointment {
         this.gender = gender;
         this.issueDescription = issueDescription;
         this.status = status;
+        this.timeSlot = timeSlot;
+        this.dateAppointment = dateAppointment;
+        this.birthDate = birthDate;
+
+        this.consulationSchedule = consulationSchedule;
     }
 
     public Long getId() {
@@ -49,13 +59,7 @@ public class Appointment {
         this.id = id;
     }
 
-    public ConsultationSchedule getConsulationSchedule() {
-        return consulationSchedule;
-    }
 
-    public void setConsulationSchedule(ConsultationSchedule consulationSchedule) {
-        this.consulationSchedule = consulationSchedule;
-    }
 
     public String getFullName() {
         return fullName;
@@ -111,5 +115,38 @@ public class Appointment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getTimeSlot() {
+        return timeSlot;
+    }
+
+    public void setTimeSlot(String timeSlot) {
+        this.timeSlot = timeSlot;
+    }
+
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getDateAppointment() {
+        return dateAppointment;
+    }
+
+    public void setDateAppointment(String dateAppointment) {
+        this.dateAppointment = dateAppointment;
+    }
+
+    public ConsultationSchedule getConsulationSchedule() {
+        return consulationSchedule;
+    }
+
+    public void setConsulationSchedule(ConsultationSchedule consulationSchedule) {
+        this.consulationSchedule = consulationSchedule;
     }
 }

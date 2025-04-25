@@ -18,10 +18,9 @@ public class AppointmentController {
     }
 
     @PostMapping("/reserve")
-    public ResponseEntity<?> reserveAppointment(@RequestParam("scheduleId") Long scheduleId,
-                                                @RequestBody AppointmentRequest appointmentRequest
-                                                ){
-        appointmentService.bookAppointment(scheduleId,appointmentRequest);
-        return  ResponseEntity.ok("Dat lich thanh cong");
+    public ResponseEntity<?> reserveAppointment(@RequestParam("ScheduleId") Long scheduleId,
+                                                @RequestBody AppointmentRequest appointmentRequest) {
+//        appointmentService.bookAppointment(doctorId, medicalTypeId, appointmentRequest);
+        return ResponseEntity.ok("Dat lich thanh cong");
     }
 }

@@ -4,5 +4,5 @@ import com.kltn.medicalwebsite.request.AppointmentRequest;
 
 public interface AppointmentService {
 
-    void bookAppointment(Long consultationSchedule, AppointmentRequest appointmentRequest);
+    void bookAppointment(Long ShceduleId, AppointmentRequest appointmentRequest);
 }

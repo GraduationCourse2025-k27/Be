@@ -2,8 +2,9 @@ package com.kltn.medicalwebsite.controller;
 
 
 import com.kltn.medicalwebsite.entity.ConsultationSchedule;
-import com.kltn.medicalwebsite.request.TimeSlotRequest;
+import com.kltn.medicalwebsite.repository.ConsultationScheduleRepository;
 import com.kltn.medicalwebsite.request.UpdateScheduleRequest;
+import com.kltn.medicalwebsite.response.TimeSlotResponse;
 import com.kltn.medicalwebsite.service.ConsultationScheduleService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/consultationSchedule")
@@ -19,34 +21,16 @@ public class ConsultationScheduleController {
 
 
     private ConsultationScheduleService consultationScheduleService;
+    private ConsultationScheduleRepository consultationScheduleRepository;
 
-    public ConsultationScheduleController(ConsultationScheduleService consultationScheduleService) {
+    public ConsultationScheduleController(ConsultationScheduleService consultationScheduleService, ConsultationScheduleRepository consultationScheduleRepository) {
         this.consultationScheduleService = consultationScheduleService;
+        this.consultationScheduleRepository = consultationScheduleRepository;
+    }
+    @PostMapping("/create-time-slots/{doctorId}")
+    public ResponseEntity<?> createTimeSlots(@PathVariable Long doctorId) {
+        consultationScheduleService.createTimeSlot(doctorId);
+        return ResponseEntity.ok("Time slots created successfully");
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<String> createSchedule(@RequestParam("doctorId") Long doctorId,
-                                                 @RequestParam("date") @DateTimeFormat(pattern = "dd-MM-yyyy")LocalDate date,
-                                                 @RequestBody List<TimeSlotRequest> slots){
-        consultationScheduleService.createTimeSlot(doctorId,date,slots);
-        return  ResponseEntity.ok("Tạo Khung giờ thành công");
-    }
-
-    @GetMapping("/getAllScheduleByDoctorId/{doctorId}")
-    public  ResponseEntity<List<ConsultationSchedule>> getAllScheduleByDoctorId(@PathVariable("doctorId")Long doctorId){
-        List<ConsultationSchedule> schedules = consultationScheduleService.findAllTimeSlotByDoctor(doctorId);
-        if(schedules.isEmpty()){
-            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }else {
-            return  new ResponseEntity<>(schedules,HttpStatus.OK);
-        }
-    }
-
-    @PutMapping("/update/{scheduleId}")
-    public ResponseEntity<String> updateSchedule(@PathVariable("scheduleId")Long scheduleId,
-                                                 @RequestBody UpdateScheduleRequest updateScheduleRequest){
-           consultationScheduleService.updateTimeSlot(scheduleId,updateScheduleRequest);
-
-           return  ResponseEntity.ok("Cập nhật khung giờ thành công");
-    }
 }

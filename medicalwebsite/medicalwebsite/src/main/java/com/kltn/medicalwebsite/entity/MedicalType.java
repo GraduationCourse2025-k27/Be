@@ -26,10 +26,11 @@ public class MedicalType {
 
     private  String description;
 
-
     @OneToMany(mappedBy = "medicalType",cascade = CascadeType.REMOVE)
     @JsonManagedReference(value = "medical-type-services")
     private List<ConsultationSchedule> consultationSchedules;
+
+
 
     public MedicalType() {
     }
@@ -68,14 +69,6 @@ public class MedicalType {
         this.createAt = createAt;
     }
 
-
-    public List<ConsultationSchedule> getConsultationSchedules() {
-        return consultationSchedules;
-    }
-
-    public void setConsultationSchedules(List<ConsultationSchedule> consultationSchedules) {
-        this.consultationSchedules = consultationSchedules;
-    }
 
     public String getImagePath() {
         return imagePath;

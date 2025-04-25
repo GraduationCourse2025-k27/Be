@@ -5,12 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface ConsultationScheduleRepository extends JpaRepository<ConsultationSchedule,Long>{
-
-
-
-    @Query("select c from ConsultationSchedule c where c.doctor.id = :doctorId")
-    public List<ConsultationSchedule> findScheduleByDoctorId(@Param("doctorId") Long doctorId);
+    void deleteByDoctorIdAndDateAppointmentBefore(Long doctorId, LocalDate date);
+    boolean existsByDoctorIdAndDateAppointment(Long doctorId, LocalDate date);
 }

@@ -4,6 +4,7 @@ package com.kltn.medicalwebsite.controller;
 import com.kltn.medicalwebsite.entity.Doctor;
 import com.kltn.medicalwebsite.request.DoctorCreate;
 import com.kltn.medicalwebsite.request.DoctorRequest;
+import com.kltn.medicalwebsite.service.ConsultationScheduleService;
 import com.kltn.medicalwebsite.service.DoctorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,8 @@ import java.util.List;
 public class DoctorController {
 
     private DoctorService doctorService;
+
+    private ConsultationScheduleService consultationScheduleService;
 
     public DoctorController(DoctorService doctorService) {
         this.doctorService = doctorService;
@@ -33,6 +36,7 @@ public class DoctorController {
     @PostMapping("/create")
     public  ResponseEntity<Doctor> create(@RequestBody DoctorCreate doctor){
         Doctor newDoctor = doctorService.create(doctor);
+        consultationScheduleService.createTimeSlot(newDoctor.getId());
         return  new ResponseEntity<>(newDoctor,HttpStatus.CREATED);
     }
 

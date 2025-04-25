@@ -1,19 +1,24 @@
-package com.kltn.medicalwebsite.request;
+package com.kltn.medicalwebsite.response;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.LocalDate;
 
-public class TimeSlotRequest {
-
+public class TimeSlotResponse {
+    private LocalDate date;
     private String startTime;
     private String endTime;
 
-    public TimeSlotRequest() {
-    }
-
-    public TimeSlotRequest(String startTime, String endTime) {
+    public TimeSlotResponse(LocalDate date, String startTime, String endTime) {
+        this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getStartTime() {

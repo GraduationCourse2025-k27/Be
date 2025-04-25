@@ -33,23 +33,21 @@ public class Doctor {
     private  String description;
     private LocalDateTime datetime;
 
-
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "doctor",cascade = CascadeType.REMOVE)
-    private List<ConsultationSchedule> consultationSchedules;
-
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.REMOVE)
     private  List<MedicalRecord> medicalRecords;
 
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.REMOVE)
     private  List<Review> reviews;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "doctor",cascade = CascadeType.REMOVE)
+    private List<ConsultationSchedule> consultationSchedules;
+
 
     public Doctor() {
     }
 
-    public Doctor(Long id, String imagePath, Client client, Speciality speciality, String description, LocalDateTime datetime, List<ConsultationSchedule> consultationSchedules, List<MedicalRecord> medicalRecords, List<Review> reviews, Double examinationPrice) {
+    public Doctor(Long id, String imagePath, Client client, Speciality speciality, String description, LocalDateTime datetime, List<MedicalRecord> medicalRecords, List<Review> reviews, Double examinationPrice) {
         this.id = id;
         this.imagePath = imagePath;
         this.client = client;

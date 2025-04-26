@@ -16,29 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `customer_support`
+-- Table structure for table `payment`
 --
 
-DROP TABLE IF EXISTS `customer_support`;
+DROP TABLE IF EXISTS `payment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customer_support` (
+CREATE TABLE `payment` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `address` varchar(120) DEFAULT NULL,
-  `name` varchar(120) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `phone` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `amount` double DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `vn_pay_link_id` varchar(255) DEFAULT NULL,
+  `vn_pay_link_reference_id` varchar(255) DEFAULT NULL,
+  `vn_pay_link_status` varchar(255) DEFAULT NULL,
+  `id_appointment` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKip6dkr7e7mkfvhmciculda35d` (`id_appointment`),
+  CONSTRAINT `FKip6dkr7e7mkfvhmciculda35d` FOREIGN KEY (`id_appointment`) REFERENCES `appointment` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `customer_support`
+-- Dumping data for table `payment`
 --
 
-LOCK TABLES `customer_support` WRITE;
-/*!40000 ALTER TABLE `customer_support` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customer_support` ENABLE KEYS */;
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+INSERT INTO `payment` VALUES (4,300000,'PENDING',NULL,NULL,NULL,30);
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-12 10:26:40
+-- Dump completed on 2025-04-26 15:13:32

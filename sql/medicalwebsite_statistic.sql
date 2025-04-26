@@ -16,35 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `medical_record`
+-- Table structure for table `statistic`
 --
 
-DROP TABLE IF EXISTS `medical_record`;
+DROP TABLE IF EXISTS `statistic`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `medical_record` (
+CREATE TABLE `statistic` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `diagnosis` varchar(255) DEFAULT NULL,
-  `prescription` text,
   `id_client` bigint DEFAULT NULL,
-  `id_doctor` bigint DEFAULT NULL,
+  `id_payment` bigint DEFAULT NULL,
+  `id_review` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKfl8h2oohry0m11daf3xc7i7` (`id_client`),
-  KEY `FK4slwna87hhxyl4pc2d86bcjj9` (`id_doctor`),
-  CONSTRAINT `FK4slwna87hhxyl4pc2d86bcjj9` FOREIGN KEY (`id_doctor`) REFERENCES `doctor` (`id`),
-  CONSTRAINT `FKfl8h2oohry0m11daf3xc7i7` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FKnd3un6b0dhykoadfaljkvwc1u` (`id_client`),
+  KEY `FKfbdf3xwro40ts4rxcyvd2vt3k` (`id_payment`),
+  KEY `FKsf0nocadek2qodublpvser2n5` (`id_review`),
+  CONSTRAINT `FKfbdf3xwro40ts4rxcyvd2vt3k` FOREIGN KEY (`id_payment`) REFERENCES `payment` (`id`),
+  CONSTRAINT `FKnd3un6b0dhykoadfaljkvwc1u` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`),
+  CONSTRAINT `FKsf0nocadek2qodublpvser2n5` FOREIGN KEY (`id_review`) REFERENCES `review` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `medical_record`
+-- Dumping data for table `statistic`
 --
 
-LOCK TABLES `medical_record` WRITE;
-/*!40000 ALTER TABLE `medical_record` DISABLE KEYS */;
-INSERT INTO `medical_record` VALUES (1,'2025-04-15 13:27:42.766631','Bình thường trở lại','Không có đơn thuốc nào cả',2,1);
-/*!40000 ALTER TABLE `medical_record` ENABLE KEYS */;
+LOCK TABLES `statistic` WRITE;
+/*!40000 ALTER TABLE `statistic` DISABLE KEYS */;
+/*!40000 ALTER TABLE `statistic` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-19 17:05:07
+-- Dump completed on 2025-04-26 15:13:32

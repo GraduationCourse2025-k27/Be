@@ -16,34 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `review`
+-- Table structure for table `appointment_cancellation`
 --
 
-DROP TABLE IF EXISTS `review`;
+DROP TABLE IF EXISTS `appointment_cancellation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `review` (
+CREATE TABLE `appointment_cancellation` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `content` text,
-  `date_review` datetime(6) DEFAULT NULL,
-  `rate` int DEFAULT NULL,
-  `id_client` bigint DEFAULT NULL,
-  `id_doctor` bigint DEFAULT NULL,
+  `create_at` datetime(6) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `id_payment` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK4o9h0elmafaddv63e9msal9at` (`id_client`),
-  KEY `FKc4loycrmna5gt23qbhkex8nry` (`id_doctor`),
-  CONSTRAINT `FK4o9h0elmafaddv63e9msal9at` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`),
-  CONSTRAINT `FKc4loycrmna5gt23qbhkex8nry` FOREIGN KEY (`id_doctor`) REFERENCES `doctor` (`id`)
+  KEY `FK12a4bbl6q9iiffbka71phfpt0` (`id_payment`),
+  CONSTRAINT `FK12a4bbl6q9iiffbka71phfpt0` FOREIGN KEY (`id_payment`) REFERENCES `payment` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `review`
+-- Dumping data for table `appointment_cancellation`
 --
 
-LOCK TABLES `review` WRITE;
-/*!40000 ALTER TABLE `review` DISABLE KEYS */;
-/*!40000 ALTER TABLE `review` ENABLE KEYS */;
+LOCK TABLES `appointment_cancellation` WRITE;
+/*!40000 ALTER TABLE `appointment_cancellation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `appointment_cancellation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-19 17:05:07
+-- Dump completed on 2025-04-26 15:13:30

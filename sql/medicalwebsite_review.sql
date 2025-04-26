@@ -16,30 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `chatbot`
+-- Table structure for table `review`
 --
 
-DROP TABLE IF EXISTS `chatbot`;
+DROP TABLE IF EXISTS `review`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `chatbot` (
+CREATE TABLE `review` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `date_time` datetime(6) DEFAULT NULL,
-  `message` text,
-  `iduser` bigint DEFAULT NULL,
+  `content` text,
+  `date_review` datetime(6) DEFAULT NULL,
+  `rate` int DEFAULT NULL,
+  `id_client` bigint DEFAULT NULL,
+  `id_doctor` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKsnw07xak2ps3u9ojx5glrg69p` (`iduser`),
-  CONSTRAINT `FKsnw07xak2ps3u9ojx5glrg69p` FOREIGN KEY (`iduser`) REFERENCES `client` (`id`)
+  KEY `FK4o9h0elmafaddv63e9msal9at` (`id_client`),
+  KEY `FKc4loycrmna5gt23qbhkex8nry` (`id_doctor`),
+  CONSTRAINT `FK4o9h0elmafaddv63e9msal9at` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`),
+  CONSTRAINT `FKc4loycrmna5gt23qbhkex8nry` FOREIGN KEY (`id_doctor`) REFERENCES `doctor` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `chatbot`
+-- Dumping data for table `review`
 --
 
-LOCK TABLES `chatbot` WRITE;
-/*!40000 ALTER TABLE `chatbot` DISABLE KEYS */;
-/*!40000 ALTER TABLE `chatbot` ENABLE KEYS */;
+LOCK TABLES `review` WRITE;
+/*!40000 ALTER TABLE `review` DISABLE KEYS */;
+/*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-19 17:05:06
+-- Dump completed on 2025-04-26 15:13:30

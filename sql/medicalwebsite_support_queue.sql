@@ -16,36 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `doctor`
+-- Table structure for table `support_queue`
 --
 
-DROP TABLE IF EXISTS `doctor`;
+DROP TABLE IF EXISTS `support_queue`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `doctor` (
+CREATE TABLE `support_queue` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `datetime` datetime(6) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `image_path` varchar(255) DEFAULT NULL,
+  `create_at` datetime(6) DEFAULT NULL,
+  `issue_description` text,
+  `resolve` text,
+  `status` varchar(255) DEFAULT NULL,
   `id_client` bigint DEFAULT NULL,
-  `id_speciality` bigint DEFAULT NULL,
-  `examination_price` double DEFAULT NULL,
+  `id_customersupport` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKn43q7dw2nkwrt0o4bwv7impu2` (`id_client`),
-  KEY `FKth8nc9mtk2799h5iesj6xp19l` (`id_speciality`),
-  CONSTRAINT `FKn43q7dw2nkwrt0o4bwv7impu2` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`),
-  CONSTRAINT `FKth8nc9mtk2799h5iesj6xp19l` FOREIGN KEY (`id_speciality`) REFERENCES `speciality` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK90oggfnkv9rxh4jqf1p9eypnx` (`id_client`),
+  KEY `FK4g34fi3wl8s5nqmiquogfp8pr` (`id_customersupport`),
+  CONSTRAINT `FK4g34fi3wl8s5nqmiquogfp8pr` FOREIGN KEY (`id_customersupport`) REFERENCES `customer_support` (`id`),
+  CONSTRAINT `FK90oggfnkv9rxh4jqf1p9eypnx` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `doctor`
+-- Dumping data for table `support_queue`
 --
 
-LOCK TABLES `doctor` WRITE;
-/*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
-INSERT INTO `doctor` VALUES (1,'2025-04-12 16:02:56.087095','nhiet huyet tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-han-van-ba_2.png',1,2,300000),(2,'2025-04-12 15:40:54.922446','Tận tâm nhiệt huyết','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-nguyen-trung-chinh_4.png',3,2,100000);
-/*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
+LOCK TABLES `support_queue` WRITE;
+/*!40000 ALTER TABLE `support_queue` DISABLE KEYS */;
+/*!40000 ALTER TABLE `support_queue` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-19 17:05:07
+-- Dump completed on 2025-04-26 15:13:31

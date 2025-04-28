@@ -21,8 +21,9 @@ public class DoctorController {
 
     private ConsultationScheduleService consultationScheduleService;
 
-    public DoctorController(DoctorService doctorService) {
+    public DoctorController(DoctorService doctorService, ConsultationScheduleService consultationScheduleService) {
         this.doctorService = doctorService;
+        this.consultationScheduleService = consultationScheduleService;
     }
 
     @GetMapping("/list")
@@ -54,11 +55,11 @@ public class DoctorController {
         return  new ResponseEntity<>(findByDoctor,HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
+    @Transactional
     public  ResponseEntity<String> deleteDoctorById(@PathVariable("id")Long id){
-        String findByDoctor = doctorService.delete(id);
-        return  new ResponseEntity<>(findByDoctor,HttpStatus.OK);
+         consultationScheduleService.deleteTimeSlotsForDoctorsId(id);
+         doctorService.delete(id);
+        return  ResponseEntity.ok("delete doctor with id :"+id+"success");
     }
-
-
 
 }

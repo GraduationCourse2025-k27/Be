@@ -31,5 +31,11 @@ public class ConsultationScheduleController {
         return ResponseEntity.ok("Time slots created successfully");
     }
 
+    @DeleteMapping("/delete-slotTimesFor-Doctor/{doctorId}")
+    public  ResponseEntity<?> deleteScheduleForDoctor(@PathVariable Long doctorId){
+        consultationScheduleService.deleteTimeSlotsForDoctorsId(doctorId);
+        return  ResponseEntity.ok("Delete Schedule For Doctor:"+doctorId+"Success");
+    }
+
 
 }

@@ -18,7 +18,6 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-
     @PostMapping("/appointment/{appointmentId}")
     public ResponseEntity<Payment> paymentAppointment(@PathVariable("appointmentId")Long id , @RequestParam("amount")Double amount){
         Payment payment = paymentService.paymentAppointmentFoDoctorId(id,amount);

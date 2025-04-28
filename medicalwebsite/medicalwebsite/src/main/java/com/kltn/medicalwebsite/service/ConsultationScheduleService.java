@@ -13,6 +13,9 @@ public interface ConsultationScheduleService {
     void updateTimeSlotsForAllDoctors();
 
 
+    void deleteTimeSlotsForDoctorsId(Long DoctorId);
+
+
 
 
 }

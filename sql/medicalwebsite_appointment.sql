@@ -43,7 +43,7 @@ CREATE TABLE `appointment` (
   CONSTRAINT `FKlqc9ktb8p50hmdgc714duduv1` FOREIGN KEY (`id_doctor`) REFERENCES `doctor` (`id`),
   CONSTRAINT `FKp3qllmsid1q5mmd086kuvw1bu` FOREIGN KEY (`id_medical_type`) REFERENCES `medical_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FKpigpadw7k2f3b2xpdyevbb9uq` FOREIGN KEY (`id_consulation_schedule`) REFERENCES `consultation_schedule` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,7 +52,6 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (30,'Sơn trà','hophuctam7112003@gmail.com','Hồ Phúc Tâm','Nam','Đau lưng','0984427846','PENDING',348,NULL,NULL,'2004-12-12','2025-04-26');
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -65,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-26 15:13:31
+-- Dump completed on 2025-04-26 15:59:27

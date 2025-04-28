@@ -115,8 +115,6 @@ public class Appointment {
 
 
 
-
-
     public String getBirthDate() {
         return birthDate;
     }

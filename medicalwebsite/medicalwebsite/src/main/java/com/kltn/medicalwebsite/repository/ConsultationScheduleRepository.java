@@ -13,5 +13,5 @@ import java.util.Optional;
 public interface ConsultationScheduleRepository extends JpaRepository<ConsultationSchedule,Long>{
     void deleteByDoctorIdAndDateAppointmentBefore(Long doctorId, LocalDate date);
     boolean existsByDoctorIdAndDateAppointment(Long doctorId, LocalDate date);
-
+    void deleteByDoctorId(Long idDoctor);
 }

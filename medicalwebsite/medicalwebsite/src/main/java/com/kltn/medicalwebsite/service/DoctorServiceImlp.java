@@ -83,7 +83,6 @@ public class DoctorServiceImlp implements  DoctorService{
               }
               updateDoctor.setDatetime(LocalDateTime.now());
 
-
               Client client = updateDoctor.getClient();
               if(client != null){
                   boolean clientUpdate = false;

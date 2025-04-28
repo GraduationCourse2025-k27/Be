@@ -28,7 +28,6 @@ public class ConsultationScheduleServiceImlp implements ConsultationScheduleServ
         this.consultationScheduleRepository = consultationScheduleRepository;
         this.doctorRepository = doctorRepository;
     }
-
     @Override
     @Transactional
     public void createTimeSlot(Long doctorId) {
@@ -77,15 +76,21 @@ public class ConsultationScheduleServiceImlp implements ConsultationScheduleServ
             consultationScheduleRepository.saveAll(schedules);
         }
     }
-
     @Override
     @Transactional
-    @Scheduled(cron = "0 0 0 * * ?") // Chạy lúc 0:00 mỗi ngày
+    @Scheduled(cron = "0 0 0 * * ?",zone = "Asia/Ho_Chi_Minh") // Chạy lúc 0:00 mỗi ngày
     public void updateTimeSlotsForAllDoctors() {
         List<Doctor> doctors = doctorRepository.findAll();
         for (Doctor doctor : doctors) {
             createTimeSlot(doctor.getId());
         }
+    }
+
+    @Override
+    @Transactional
+    public void deleteTimeSlotsForDoctorsId(Long DoctorId) {
+        Doctor doctor = doctorRepository.findById(DoctorId).orElseThrow(() -> new DoctorException("Doctor not found with id :"+DoctorId));
+        consultationScheduleRepository.deleteByDoctorId(DoctorId);
     }
 
 }

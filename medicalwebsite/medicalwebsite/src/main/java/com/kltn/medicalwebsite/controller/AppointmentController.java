@@ -3,6 +3,7 @@ package com.kltn.medicalwebsite.controller;
 
 import com.kltn.medicalwebsite.entity.Appointment;
 import com.kltn.medicalwebsite.request.AppointmentRequest;
+import com.kltn.medicalwebsite.response.MyAppointmentResponse;
 import com.kltn.medicalwebsite.service.AppointmentService;
 import com.kltn.medicalwebsite.service.EmailSenderService;
 import org.springframework.http.HttpStatus;
@@ -44,8 +45,13 @@ public class AppointmentController {
 
     @PutMapping("/cancel/{id}")
     public  ResponseEntity<?> updateCancelAppointment(@PathVariable("id")Long id){
-        appointmentService.statusCancelAppointmentById(id);
-        return ResponseEntity.ok("set cancel success");
+         Boolean checkAppointmentCancel =  appointmentService.statusCancelAppointmentById(id);
+         if(checkAppointmentCancel){
+             return ResponseEntity.ok("Hủy Thành Công !");
+         }else {
+             return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+         }
+
     }
     @PutMapping("/complete/{id}")
     public  ResponseEntity<?> updateCompleteAppointment(@PathVariable("id")Long id){
@@ -72,6 +78,15 @@ public class AppointmentController {
     @GetMapping("/list/confirm")
     public  ResponseEntity<List<Appointment>> findAllAppointmentForConfirm(@RequestParam("email") String email){
         List<Appointment>appointments =  appointmentService.findAllAppointmentForConfirm(email);
+        if(appointments.isEmpty()){
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            return  new ResponseEntity<>(appointments,HttpStatus.OK);
+        }
+    }
+    @GetMapping("/list-appointment-by-email")
+    public  ResponseEntity<List<MyAppointmentResponse>> findAllAppointmentByEmail(@RequestParam("email")String email){
+        List<MyAppointmentResponse> appointments = appointmentService.findAllAppointmentByEmail(email);
         if(appointments.isEmpty()){
             return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }else {

@@ -76,16 +76,13 @@ public class ConsultationScheduleServiceImlp implements ConsultationScheduleServ
     }
     @Override
     @Transactional
-    @Scheduled(cron = "* */10 * * * ?", zone = "Asia/Ho_Chi_Minh")
+    @Scheduled(cron = "0 0 0 * * ?", zone = "Asia/Ho_Chi_Minh")
     public void updateTimeSlotsForAllDoctors() {
         List<Doctor> doctors = doctorRepository.findAll();
         for (Doctor doctor : doctors) {
             createTimeSlot(doctor.getId());
         }
     }
-
-
-
 
     @Override
     @Transactional

@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `medicalwebsite` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `medicalwebsite`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: medicalwebsite
@@ -16,32 +18,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `appointment_cancellation`
+-- Table structure for table `statistic`
 --
 
-DROP TABLE IF EXISTS `appointment_cancellation`;
+DROP TABLE IF EXISTS `statistic`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `appointment_cancellation` (
+CREATE TABLE `statistic` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `create_at` datetime(6) DEFAULT NULL,
-  `message` varchar(255) DEFAULT NULL,
+  `id_client` bigint DEFAULT NULL,
   `id_payment` bigint DEFAULT NULL,
-  `refund` double DEFAULT NULL,
+  `id_review` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK12a4bbl6q9iiffbka71phfpt0` (`id_payment`),
-  CONSTRAINT `FK12a4bbl6q9iiffbka71phfpt0` FOREIGN KEY (`id_payment`) REFERENCES `payment` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FKnd3un6b0dhykoadfaljkvwc1u` (`id_client`),
+  KEY `FKfbdf3xwro40ts4rxcyvd2vt3k` (`id_payment`),
+  KEY `FKsf0nocadek2qodublpvser2n5` (`id_review`),
+  CONSTRAINT `FKfbdf3xwro40ts4rxcyvd2vt3k` FOREIGN KEY (`id_payment`) REFERENCES `payment` (`id`),
+  CONSTRAINT `FKnd3un6b0dhykoadfaljkvwc1u` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`),
+  CONSTRAINT `FKsf0nocadek2qodublpvser2n5` FOREIGN KEY (`id_review`) REFERENCES `review` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `appointment_cancellation`
+-- Dumping data for table `statistic`
 --
 
-LOCK TABLES `appointment_cancellation` WRITE;
-/*!40000 ALTER TABLE `appointment_cancellation` DISABLE KEYS */;
-INSERT INTO `appointment_cancellation` VALUES (1,'2025-05-09 03:54:28.793926','Appointment Cancel',30,150000),(2,'2025-05-09 03:56:52.387971','Appointment Cancel',31,200000);
-/*!40000 ALTER TABLE `appointment_cancellation` ENABLE KEYS */;
+LOCK TABLES `statistic` WRITE;
+/*!40000 ALTER TABLE `statistic` DISABLE KEYS */;
+/*!40000 ALTER TABLE `statistic` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-09  6:48:10
+-- Dump completed on 2025-05-10  1:18:34

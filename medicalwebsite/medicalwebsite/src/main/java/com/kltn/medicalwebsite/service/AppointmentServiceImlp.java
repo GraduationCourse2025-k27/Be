@@ -162,7 +162,7 @@ public class AppointmentServiceImlp implements AppointmentService {
         return appointmentRepository.findByEmail(email).
                 stream().
                 sorted(Comparator.comparing((Appointment::getId)).reversed()).
-                map(appointment -> new MyAppointmentResponse(appointment.getConsulationSchedule().getDoctor(), appointment.getConsulationSchedule(),appointment.getStatus())).collect(Collectors.toList());
+                map(appointment -> new MyAppointmentResponse(appointment.getId(),appointment.getConsulationSchedule().getDoctor(), appointment.getConsulationSchedule(),appointment.getStatus())).collect(Collectors.toList());
     }
 
     @Override
@@ -172,6 +172,12 @@ public class AppointmentServiceImlp implements AppointmentService {
         LocalDateTime fiveMinutesAgo = LocalDateTime.now().minusMinutes(5);
         List<Appointment> unpaidAppointments = appointmentRepository.findByPaymentsIsEmptyAndDateAppointmentBefore(fiveMinutesAgo);
         for (Appointment appointment : unpaidAppointments){
+            Optional<ConsultationSchedule> consultationSchedule = consultationScheduleRepository.findById(appointment.getConsulationSchedule().getId());
+             if(consultationSchedule.isPresent()){
+                 ConsultationSchedule updateSchedule = consultationSchedule.get();
+                 updateSchedule.setBooked(false);
+                 consultationScheduleRepository.save(updateSchedule);
+             }
              deleteAppointmentById(appointment.getId());
         }
     }

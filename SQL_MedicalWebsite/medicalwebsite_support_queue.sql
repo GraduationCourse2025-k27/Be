@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `medicalwebsite` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `medicalwebsite`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: medicalwebsite
@@ -16,29 +18,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `customer_support`
+-- Table structure for table `support_queue`
 --
 
-DROP TABLE IF EXISTS `customer_support`;
+DROP TABLE IF EXISTS `support_queue`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customer_support` (
+CREATE TABLE `support_queue` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `address` varchar(120) DEFAULT NULL,
-  `name` varchar(120) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `phone` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `create_at` datetime(6) DEFAULT NULL,
+  `issue_description` text,
+  `resolve` text,
+  `status` varchar(255) DEFAULT NULL,
+  `id_client` bigint DEFAULT NULL,
+  `id_customersupport` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK90oggfnkv9rxh4jqf1p9eypnx` (`id_client`),
+  KEY `FK4g34fi3wl8s5nqmiquogfp8pr` (`id_customersupport`),
+  CONSTRAINT `FK4g34fi3wl8s5nqmiquogfp8pr` FOREIGN KEY (`id_customersupport`) REFERENCES `customer_support` (`id`),
+  CONSTRAINT `FK90oggfnkv9rxh4jqf1p9eypnx` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `customer_support`
+-- Dumping data for table `support_queue`
 --
 
-LOCK TABLES `customer_support` WRITE;
-/*!40000 ALTER TABLE `customer_support` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customer_support` ENABLE KEYS */;
+LOCK TABLES `support_queue` WRITE;
+/*!40000 ALTER TABLE `support_queue` DISABLE KEYS */;
+/*!40000 ALTER TABLE `support_queue` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-09  6:48:11
+-- Dump completed on 2025-05-10  1:18:34

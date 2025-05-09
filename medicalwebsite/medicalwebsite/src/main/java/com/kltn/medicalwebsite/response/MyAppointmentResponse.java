@@ -4,6 +4,7 @@ import com.kltn.medicalwebsite.entity.ConsultationSchedule;
 import com.kltn.medicalwebsite.entity.Doctor;
 
 public class MyAppointmentResponse {
+    private  Long appointment ;
     private Doctor doctor;
     private ConsultationSchedule consultationSchedule;
     private  String status;
@@ -11,7 +12,8 @@ public class MyAppointmentResponse {
     public MyAppointmentResponse() {
     }
 
-    public MyAppointmentResponse(Doctor doctor, ConsultationSchedule consultationSchedule,String status) {
+    public MyAppointmentResponse(Long appointment, Doctor doctor, ConsultationSchedule consultationSchedule, String status) {
+        this.appointment = appointment;
         this.doctor = doctor;
         this.consultationSchedule = consultationSchedule;
         this.status = status;
@@ -40,5 +42,13 @@ public class MyAppointmentResponse {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Long appointment) {
+        this.appointment = appointment;
     }
 }

@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `medicalwebsite` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `medicalwebsite`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: medicalwebsite
@@ -16,34 +18,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `statistic`
+-- Table structure for table `customer_support`
 --
 
-DROP TABLE IF EXISTS `statistic`;
+DROP TABLE IF EXISTS `customer_support`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `statistic` (
+CREATE TABLE `customer_support` (
   `id` bigint NOT NULL AUTO_INCREMENT,
+  `address` varchar(120) DEFAULT NULL,
+  `name` varchar(120) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `image_path` varchar(255) DEFAULT NULL,
   `id_client` bigint DEFAULT NULL,
-  `id_payment` bigint DEFAULT NULL,
-  `id_review` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKnd3un6b0dhykoadfaljkvwc1u` (`id_client`),
-  KEY `FKfbdf3xwro40ts4rxcyvd2vt3k` (`id_payment`),
-  KEY `FKsf0nocadek2qodublpvser2n5` (`id_review`),
-  CONSTRAINT `FKfbdf3xwro40ts4rxcyvd2vt3k` FOREIGN KEY (`id_payment`) REFERENCES `payment` (`id`),
-  CONSTRAINT `FKnd3un6b0dhykoadfaljkvwc1u` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`),
-  CONSTRAINT `FKsf0nocadek2qodublpvser2n5` FOREIGN KEY (`id_review`) REFERENCES `review` (`id`)
+  KEY `FK7gnx5faxjtuhmxvm8sqt4x2we` (`id_client`),
+  CONSTRAINT `FK7gnx5faxjtuhmxvm8sqt4x2we` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `statistic`
+-- Dumping data for table `customer_support`
 --
 
-LOCK TABLES `statistic` WRITE;
-/*!40000 ALTER TABLE `statistic` DISABLE KEYS */;
-/*!40000 ALTER TABLE `statistic` ENABLE KEYS */;
+LOCK TABLES `customer_support` WRITE;
+/*!40000 ALTER TABLE `customer_support` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customer_support` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-09  6:48:10
+-- Dump completed on 2025-05-10  1:18:35

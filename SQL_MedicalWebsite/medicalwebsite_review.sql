@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `medicalwebsite` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `medicalwebsite`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: medicalwebsite
@@ -16,38 +18,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `medical_record`
+-- Table structure for table `review`
 --
 
-DROP TABLE IF EXISTS `medical_record`;
+DROP TABLE IF EXISTS `review`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `medical_record` (
+CREATE TABLE `review` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_at` datetime(6) DEFAULT NULL,
-  `diagnosis` varchar(255) DEFAULT NULL,
-  `prescription` text,
+  `content` text,
+  `date_review` datetime(6) DEFAULT NULL,
+  `rate` int DEFAULT NULL,
   `id_client` bigint DEFAULT NULL,
   `id_doctor` bigint DEFAULT NULL,
-  `birth_date_patient` datetime(6) DEFAULT NULL,
-  `gender` varchar(255) DEFAULT NULL,
-  `note` text,
   PRIMARY KEY (`id`),
-  KEY `FKfl8h2oohry0m11daf3xc7i7` (`id_client`),
-  KEY `FK4slwna87hhxyl4pc2d86bcjj9` (`id_doctor`),
-  CONSTRAINT `FK4slwna87hhxyl4pc2d86bcjj9` FOREIGN KEY (`id_doctor`) REFERENCES `doctor` (`id`),
-  CONSTRAINT `FKfl8h2oohry0m11daf3xc7i7` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK4o9h0elmafaddv63e9msal9at` (`id_client`),
+  KEY `FKc4loycrmna5gt23qbhkex8nry` (`id_doctor`),
+  CONSTRAINT `FK4o9h0elmafaddv63e9msal9at` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`),
+  CONSTRAINT `FKc4loycrmna5gt23qbhkex8nry` FOREIGN KEY (`id_doctor`) REFERENCES `doctor` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `medical_record`
+-- Dumping data for table `review`
 --
 
-LOCK TABLES `medical_record` WRITE;
-/*!40000 ALTER TABLE `medical_record` DISABLE KEYS */;
-INSERT INTO `medical_record` VALUES (1,'2025-04-15 13:27:42.766631','Bình thường trở lại','Không có đơn thuốc nào cả',2,1,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `medical_record` ENABLE KEYS */;
+LOCK TABLES `review` WRITE;
+/*!40000 ALTER TABLE `review` DISABLE KEYS */;
+INSERT INTO `review` VALUES (1,'Bác sĩ tận tâm, nhiệt tình , chu đáo','2025-05-09 04:46:33.773439',5,42,8),(2,'Chu đáo và nhiệt tình','2025-05-09 05:40:06.860893',4,42,8),(3,'Bác sĩ có tâm và có tầm','2025-05-09 06:27:35.485863',5,42,8),(4,'Bác sĩ này thật nhiệt tình ','2025-05-09 06:28:20.114760',3,42,8),(5,'Bác sĩ dễ thương và nhiệt tình','2025-05-09 06:42:04.458871',3,42,8),(6,'Bác sĩ thiện cảm và tận tâm','2025-05-09 06:43:43.011350',2,42,8);
+/*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -59,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-09  6:48:11
+-- Dump completed on 2025-05-10  1:18:34

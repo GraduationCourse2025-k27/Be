@@ -12,11 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -166,6 +164,14 @@ public class AppointmentServiceImlp implements AppointmentService {
     }
 
     @Override
+    public List<Appointment> findAllAppointment() {
+        List<Appointment> appointments = appointmentRepository.findAll();
+        appointments = appointments.stream().sorted(Comparator.comparing(Appointment::getId).reversed()).collect(Collectors.toList());
+
+        return appointments;
+    }
+
+    @Override
     @Scheduled(fixedRate = 60000)
     @Transactional
     public void deleteUnpaidAppointments() {
@@ -180,6 +186,32 @@ public class AppointmentServiceImlp implements AppointmentService {
              }
              deleteAppointmentById(appointment.getId());
         }
+    }
+
+    @Override
+    public Map<String, Object> getCurrentYearStats() {
+        int currentYear = LocalDateTime.now().getYear();
+
+        Long totalAppointments = appointmentRepository.countByYear(currentYear);
+
+
+        Map<String,Long> monthlyStats = new HashMap<>();
+        for (Month month : Month.values()){
+            Long count = appointmentRepository.countByMonthAndYear(month.getValue(),currentYear);
+            monthlyStats.put(month.name(), count);
+        }
+
+        Map<String,Long> quarterlyStats = new HashMap<>();
+        quarterlyStats.put("Q1",appointmentRepository.countByMonthRangeAndYear(1,3,currentYear));
+        quarterlyStats.put("Q2",appointmentRepository.countByMonthRangeAndYear(4,6,currentYear));
+        quarterlyStats.put("Q3",appointmentRepository.countByMonthRangeAndYear(7,9,currentYear));
+        quarterlyStats.put("Q4",appointmentRepository.countByMonthRangeAndYear(10,12,currentYear));
+
+        Map<String,Object> result = new HashMap<>();
+        result.put("totalAppointments",totalAppointments);
+        result.put("monthlyStats",monthlyStats);
+        result.put("quarterlyStats",quarterlyStats);
+        return  result;
     }
 
 

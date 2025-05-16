@@ -31,7 +31,6 @@ public class MedicalRecordController {
     @GetMapping("/search/{recordId}")
     public  ResponseEntity<?> findMedicalRecordById (@PathVariable("recordId") Long id){
         MedicalRecord medicalRecord = medicalRecordService.findMedicalRecordById(id);
-
         return  new ResponseEntity<>(medicalRecord,HttpStatus.OK);
     }
 
@@ -51,8 +50,8 @@ public class MedicalRecordController {
         }
     }
     @GetMapping("/listRecordByDoctor")
-    public  ResponseEntity<?> getAllRecordByDoctor(@RequestParam("doctorId")Long id){
-        List<MedicalRecord> records = medicalRecordService.findMedicalRecordByDoctor(id);
+    public  ResponseEntity<?> getAllRecordByDoctor(@RequestParam("doctorId")Long id , @RequestParam(required = false,value = "namePatient")String namePatient){
+        List<MedicalRecord> records = medicalRecordService.findMedicalRecordByDoctor(id,namePatient);
         if(records.isEmpty()){
             return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }else {

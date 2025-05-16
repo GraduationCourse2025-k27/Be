@@ -9,7 +9,7 @@ public interface MedicalRecordService {
 
     MedicalRecord addMedicalRecord(MedicalRecordRequest medicalRecord);
     MedicalRecord updateMedicalRecord(MedicalRecordRequest medicalRecordRequest,Long medicalRecordId);
-    List<MedicalRecord> findMedicalRecordByDoctor(Long doctorId);
+    List<MedicalRecord> findMedicalRecordByDoctor(Long doctorId,String namePatient);
     List<MedicalRecord> findMedicalRecordByUser(Long userId);
     MedicalRecord findMedicalRecordById(Long medicalRecordId);
 }

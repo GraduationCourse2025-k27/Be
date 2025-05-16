@@ -20,4 +20,6 @@ public interface MeidcalRecordRepository extends JpaRepository<MedicalRecord,Lon
     @Query("Select m from MedicalRecord m Where m.client.id =:clientId")
     public  List<MedicalRecord> findMedicalRecordByClient(@Param("clientId")Long id);
 
+
+
 }

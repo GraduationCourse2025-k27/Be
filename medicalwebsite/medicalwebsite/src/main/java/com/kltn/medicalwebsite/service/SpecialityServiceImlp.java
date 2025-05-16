@@ -9,8 +9,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SpecialityServiceImlp implements SpecialityService {
@@ -40,6 +42,7 @@ public class SpecialityServiceImlp implements SpecialityService {
         if(existingSpeciality.isPresent()){
                 Speciality updateSpeciality = existingSpeciality.get();
                 updateSpeciality.setName(speciality.getName());
+                updateSpeciality.setImagePath(speciality.getImagePath());
                 updateSpeciality.setCreateAt(LocalDateTime.now());
                 return  specialityRepository.save(updateSpeciality);
         }else {
@@ -68,5 +71,12 @@ public class SpecialityServiceImlp implements SpecialityService {
             throw   new SpecialityException("speciality not found with:"+id);
         }
 
+    }
+
+    @Override
+    public List<Speciality> findByNameContainingIgnoreCase(String name) {
+        List<Speciality> specialities = specialityRepository.findByNameContainingIgnoreCase(name);
+        specialities = specialities.stream().sorted(Comparator.comparing(Speciality::getId).reversed()).collect(Collectors.toList());
+        return specialities;
     }
 }

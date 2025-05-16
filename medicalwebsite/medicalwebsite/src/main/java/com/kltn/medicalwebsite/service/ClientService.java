@@ -19,5 +19,7 @@ public interface ClientService {
     Client findClientByEmail(String email);
     Client findClientById(Long id);
 
+    List<Client> findUserByRoleUser();
+
 
 }

@@ -8,8 +8,10 @@ import com.kltn.medicalwebsite.request.LoginRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClientServiceImlp  implements  ClientService{
@@ -81,5 +83,12 @@ public class ClientServiceImlp  implements  ClientService{
         }else {
             throw  new ClientException("Client not found with id :"+id);
         }
+    }
+
+    @Override
+    public List<Client> findUserByRoleUser() {
+        List<Client>  clients = repository.getAllClientByRoleUser();
+        clients = clients.stream().sorted(Comparator.comparing(Client::getId).reversed()).collect(Collectors.toList());
+        return clients;
     }
 }

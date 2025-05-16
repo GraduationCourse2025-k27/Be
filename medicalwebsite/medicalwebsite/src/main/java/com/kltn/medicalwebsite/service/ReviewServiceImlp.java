@@ -10,10 +10,12 @@ import com.kltn.medicalwebsite.repository.ClientRepository;
 import com.kltn.medicalwebsite.repository.DoctorRepository;
 import com.kltn.medicalwebsite.repository.ReviewRepository;
 import com.kltn.medicalwebsite.request.ReviewRequest;
+import com.kltn.medicalwebsite.response.Top5DoctorResponse;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewServiceImlp  implements  ReviewService{
@@ -46,5 +48,12 @@ public class ReviewServiceImlp  implements  ReviewService{
     public List<Review> findAllReviewByDoctorId(Long doctorId) {
         List<Review> reviews = reviewRepository.findByDoctorId(doctorId);
         return reviews;
+    }
+
+    @Override
+    public List<Top5DoctorResponse> findAllReviewsOrderByDoctorAvgRateDesc() {
+        List<Top5DoctorResponse> Top5Reviews = reviewRepository.FindTop5Doctor();
+        Top5Reviews = Top5Reviews.stream().limit(5).collect(Collectors.toList());
+        return  Top5Reviews;
     }
 }

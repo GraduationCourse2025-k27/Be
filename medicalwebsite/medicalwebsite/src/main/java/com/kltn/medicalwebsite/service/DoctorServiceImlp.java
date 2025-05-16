@@ -10,6 +10,7 @@ import com.kltn.medicalwebsite.repository.SpecialityRepository;
 import com.kltn.medicalwebsite.request.DoctorCreate;
 import com.kltn.medicalwebsite.request.DoctorRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -81,6 +82,9 @@ public class DoctorServiceImlp implements  DoctorService{
               if(doctor.getSpeciality() != null){
                   updateDoctor.setSpeciality(existingSpeciality.get());
               }
+              if(doctor.getPrice() != null){
+                  updateDoctor.setExaminationPrice(doctor.getPrice());
+              }
               updateDoctor.setDatetime(LocalDateTime.now());
 
               Client client = updateDoctor.getClient();
@@ -116,14 +120,19 @@ public class DoctorServiceImlp implements  DoctorService{
     }
 
     @Override
+    @Transactional
     public String delete(Long id) {
-         Optional<Doctor> existingDoctor = doctorRepository.findById(id);
-         if(existingDoctor.isPresent()){
-             doctorRepository.deleteById(id);
-             return   "Delete Doctor with id:"+id +" "+ "success";
-         }else {
-             throw  new DoctorException("doctor not found with id :"+id);
-         }
+        Optional<Doctor> existingDoctor = doctorRepository.findById(id);
+        if (existingDoctor.isPresent()) {
+            Doctor doctor = existingDoctor.get();
+            Client client = doctor.getClient();
+            doctorRepository.deleteById(doctor.getId());
+            clientRepository.deleteById(client.getId());
+
+            return "Delete Doctor with id:" + id + " success";
+        } else {
+            throw new DoctorException("doctor not found with id :" + id);
+        }
     }
 
     @Override

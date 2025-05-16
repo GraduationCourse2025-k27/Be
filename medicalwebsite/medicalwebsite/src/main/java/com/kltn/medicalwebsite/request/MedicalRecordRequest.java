@@ -9,13 +9,14 @@ public class MedicalRecordRequest {
     private  String note;
     private  String birthDatePatient;
     private  String gender;
+    private  String namePatient;
 
 
     public MedicalRecordRequest() {
 
     }
 
-    public MedicalRecordRequest(Long clientId, Long doctorId, String diagnosis, String prescription, String note, String birthDatePatient, String gender) {
+    public MedicalRecordRequest(Long clientId, Long doctorId, String diagnosis, String prescription, String note, String birthDatePatient, String gender, String namePatient) {
         this.clientId = clientId;
         this.doctorId = doctorId;
         this.diagnosis = diagnosis;
@@ -23,6 +24,7 @@ public class MedicalRecordRequest {
         this.note = note;
         this.birthDatePatient = birthDatePatient;
         this.gender = gender;
+        this.namePatient = namePatient;
     }
 
 
@@ -80,5 +82,13 @@ public class MedicalRecordRequest {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getNamePatient() {
+        return namePatient;
+    }
+
+    public void setNamePatient(String namePatient) {
+        this.namePatient = namePatient;
     }
 }

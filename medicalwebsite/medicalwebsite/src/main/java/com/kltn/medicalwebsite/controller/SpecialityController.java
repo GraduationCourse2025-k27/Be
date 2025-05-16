@@ -52,4 +52,14 @@ public class SpecialityController {
         return  new ResponseEntity<>(deleteSpeciality,HttpStatus.OK);
     }
 
+    @GetMapping("/searchName")
+    public  ResponseEntity<List<Speciality>> getAllSpecialityByName(@RequestParam(required = false,value = "name")String name){
+        List<Speciality> specialities = specialityService.findByNameContainingIgnoreCase(name);
+        if(specialities.isEmpty()){
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            return  new ResponseEntity<>(specialities,HttpStatus.OK);
+        }
+    }
+
 }

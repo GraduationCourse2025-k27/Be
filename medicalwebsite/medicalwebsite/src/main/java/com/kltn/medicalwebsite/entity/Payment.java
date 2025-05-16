@@ -3,6 +3,7 @@ package com.kltn.medicalwebsite.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -25,6 +26,10 @@ public class Payment {
     private  String vnPayLinkReferenceId;
     private  String vnPayLinkStatus;
 
+    private  String typePayment;
+
+    private LocalDateTime datePayment;
+
     @OneToMany(mappedBy = "payment",cascade = CascadeType.REMOVE)
     private List<appointmentCancellation> appointmentCancellations;
 
@@ -32,7 +37,7 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(Long id, Appointment appointment, String status, Double amount, String vnPayLinkId, String vnPayLinkReferenceId, String vnPayLinkStatus) {
+    public Payment(Long id, Appointment appointment, String status, Double amount, String vnPayLinkId, String vnPayLinkReferenceId, String vnPayLinkStatus, String typePayment, LocalDateTime datePayment) {
         this.id = id;
         this.appointment = appointment;
         this.status = status;
@@ -40,6 +45,8 @@ public class Payment {
         this.vnPayLinkId = vnPayLinkId;
         this.vnPayLinkReferenceId = vnPayLinkReferenceId;
         this.vnPayLinkStatus = vnPayLinkStatus;
+        this.typePayment = typePayment;
+        this.datePayment = datePayment;
     }
 
     public Long getId() {
@@ -96,5 +103,21 @@ public class Payment {
 
     public void setVnPayLinkStatus(String vnPayLinkStatus) {
         this.vnPayLinkStatus = vnPayLinkStatus;
+    }
+
+    public String getTypePayment() {
+        return typePayment;
+    }
+
+    public void setTypePayment(String typePayment) {
+        this.typePayment = typePayment;
+    }
+
+    public LocalDateTime getDatePayment() {
+        return datePayment;
+    }
+
+    public void setDatePayment(LocalDateTime datePayment) {
+        this.datePayment = datePayment;
     }
 }

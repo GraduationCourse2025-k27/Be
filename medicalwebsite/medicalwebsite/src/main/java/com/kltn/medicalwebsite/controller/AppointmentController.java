@@ -2,8 +2,10 @@ package com.kltn.medicalwebsite.controller;
 
 
 import com.kltn.medicalwebsite.entity.Appointment;
+import com.kltn.medicalwebsite.entity.appointmentCancellation;
 import com.kltn.medicalwebsite.request.AppointmentRequest;
 import com.kltn.medicalwebsite.response.MyAppointmentResponse;
+import com.kltn.medicalwebsite.service.AppointmentCancellationService;
 import com.kltn.medicalwebsite.service.AppointmentService;
 import com.kltn.medicalwebsite.service.EmailSenderService;
 import org.springframework.http.HttpStatus;
@@ -18,10 +20,12 @@ public class AppointmentController {
 
 
     private AppointmentService appointmentService;
+    private AppointmentCancellationService appointmentCancellationService;
 
 
-    public AppointmentController(AppointmentService appointmentService) {
+    public AppointmentController(AppointmentService appointmentService, AppointmentCancellationService appointmentCancellationService) {
         this.appointmentService = appointmentService;
+        this.appointmentCancellationService = appointmentCancellationService;
     }
 
     @PostMapping("/reserve")
@@ -91,6 +95,26 @@ public class AppointmentController {
             return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }else {
             return  new ResponseEntity<>(appointments,HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/list")
+    public  ResponseEntity<List<Appointment>> getAllAppointments(){
+        List<Appointment> appointments = appointmentService.findAllAppointment();
+        if(appointments.isEmpty()){
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            return  new ResponseEntity<>(appointments,HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/list/canceled")
+    public  ResponseEntity<List<appointmentCancellation>> getAllAppointmentcanceled(){
+        List<appointmentCancellation> cancellations = appointmentCancellationService.getAllAppointmentCancellation();
+        if(cancellations.isEmpty()){
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            return  new ResponseEntity<>(cancellations,HttpStatus.OK);
         }
     }
 

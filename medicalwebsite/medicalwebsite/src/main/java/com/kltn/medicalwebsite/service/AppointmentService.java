@@ -1,11 +1,11 @@
 package com.kltn.medicalwebsite.service;
 
 import com.kltn.medicalwebsite.entity.Appointment;
-import com.kltn.medicalwebsite.entity.appointmentCancellation;
 import com.kltn.medicalwebsite.request.AppointmentRequest;
 import com.kltn.medicalwebsite.response.MyAppointmentResponse;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AppointmentService {
 
@@ -19,6 +19,9 @@ public interface AppointmentService {
     List<Appointment> findAllAppointmentForPending(String email);
     List<Appointment> findAllAppointmentForConfirm(String email);
     List<MyAppointmentResponse> findAllAppointmentByEmail(String email);
+
+    List<Appointment> findAllAppointment();
     void deleteUnpaidAppointments();
 
+    Map<String, Object> getCurrentYearStats();
 }

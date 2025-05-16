@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/payment")
 public class PaymentController {
@@ -80,6 +82,7 @@ public class PaymentController {
             payment.setVnPayLinkId(vnp_BankTranNo);
             payment.setVnPayLinkReferenceId(vnp_TransactionNo);
             payment.setVnPayLinkStatus(vnp_TransactionStatus);
+            payment.setDatePayment(LocalDateTime.now());
             appointmentRepository.save(appointment);
             paymentRepository.save(payment);
             ApiResponse apiResponse = new ApiResponse();

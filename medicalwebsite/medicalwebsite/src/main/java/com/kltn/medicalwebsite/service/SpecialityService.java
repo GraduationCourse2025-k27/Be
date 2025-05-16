@@ -17,5 +17,6 @@ public interface SpecialityService {
 
     Speciality findSpecialityById(Long id);
 
+    List<Speciality> findByNameContainingIgnoreCase(String name);
 
 }

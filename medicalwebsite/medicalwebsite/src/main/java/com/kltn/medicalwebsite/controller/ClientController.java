@@ -68,6 +68,20 @@ public class ClientController {
         return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/role-user")
+    public ResponseEntity<List<Client>> getClientsByRoleUser(){
+        try {
+            List<Client> clients = clientService.findUserByRoleUser();
+            if(clients.isEmpty()){
+                return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }else {
+                return  new ResponseEntity<>(clients,HttpStatus.OK);
+            }
+        }catch (Exception e){
+             return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 
 }

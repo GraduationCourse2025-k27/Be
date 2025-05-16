@@ -11,6 +11,9 @@ import com.kltn.medicalwebsite.webconfig.VNPayConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -39,6 +42,7 @@ public class PaymentServiceImlp implements PaymentService {
             payment.setAppointment(exsitAppointment.get());
             payment.setAmount(amount);
             payment.setStatus("PENDING");
+            payment.setDatePayment(LocalDateTime.now());
             return paymentRepository.save(payment);
         } else {
             throw new AppointmentException("can't pay cause appointment not found with id :" + appointment);
@@ -75,5 +79,33 @@ public class PaymentServiceImlp implements PaymentService {
                 .code("ok")
                 .message("success")
                 .paymentUrl(paymentUrl).build();
+    }
+
+    @Override
+    public Map<String, Object> getCurrentYearRevenueStats() {
+        int currentYear = LocalDateTime.now().getYear();
+
+        Double totalRevenue = paymentRepository.sumRevenueByYear(currentYear);
+        totalRevenue = (totalRevenue != null) ? totalRevenue : 0.0;
+
+        Map<String, Double> monthlyRevenue = new HashMap<>();
+        for (Month month : Month.values()) {
+            Double revenue = paymentRepository.sumRevenueByMonthAndYear(month.getValue(), currentYear);
+            monthlyRevenue.put(month.name(), revenue != null ? revenue : 0.0);
+        }
+
+        // Quarterly revenue breakdown
+        Map<String, Double> quarterlyRevenue = new HashMap<>();
+        quarterlyRevenue.put("Q1", paymentRepository.sumRevenueByMonthRangeAndYear(1, 3, currentYear));
+        quarterlyRevenue.put("Q2", paymentRepository.sumRevenueByMonthRangeAndYear(4, 6, currentYear));
+        quarterlyRevenue.put("Q3", paymentRepository.sumRevenueByMonthRangeAndYear(7, 9, currentYear));
+        quarterlyRevenue.put("Q4", paymentRepository.sumRevenueByMonthRangeAndYear(10, 12, currentYear));
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("totalRevenue", totalRevenue);
+        result.put("monthlyRevenue", monthlyRevenue);
+        result.put("quarterlyRevenue", quarterlyRevenue);
+
+        return result;
     }
 }

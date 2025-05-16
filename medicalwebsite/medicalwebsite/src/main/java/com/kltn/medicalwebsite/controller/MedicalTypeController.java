@@ -2,12 +2,14 @@ package com.kltn.medicalwebsite.controller;
 
 
 import com.kltn.medicalwebsite.entity.MedicalType;
+import com.kltn.medicalwebsite.response.MedicalTypeReviewUsageResponse;
 import com.kltn.medicalwebsite.service.MedicalTypeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/medicaltype")
@@ -57,6 +59,25 @@ public class MedicalTypeController {
             return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }else {
             return  new ResponseEntity<>(medicalTypes,HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/usage")
+    public  ResponseEntity<List<Map<String,Object>>> getMedicalTypeUsage(){
+        List<Map<String,Object>> usageList = medicalTypeService.getMedicalTypeUsage();
+        if(usageList.isEmpty()){
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return  ResponseEntity.ok(usageList);
+    }
+
+    @GetMapping("/reviews")
+    public  ResponseEntity<List<MedicalTypeReviewUsageResponse>> getMedicalTypeReviews(){
+        List<MedicalTypeReviewUsageResponse> reviews = medicalTypeService.getMedicalTypeReviews();
+        if(reviews.isEmpty()){
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            return  ResponseEntity.ok(reviews);
         }
     }
 }

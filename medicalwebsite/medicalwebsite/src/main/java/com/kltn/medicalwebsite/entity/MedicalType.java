@@ -30,6 +30,10 @@ public class MedicalType {
     @JsonManagedReference(value = "medical-type-services")
     private List<ConsultationSchedule> consultationSchedules;
 
+    @JsonManagedReference(value = "medical-type-reviews")
+    @OneToMany(mappedBy = "medicalType",cascade = CascadeType.REMOVE)
+    private  List<Review> reviews;
+
 
 
     public MedicalType() {
@@ -92,5 +96,14 @@ public class MedicalType {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

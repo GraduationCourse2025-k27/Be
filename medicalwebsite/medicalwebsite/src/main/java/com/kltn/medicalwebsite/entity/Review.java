@@ -24,6 +24,11 @@ public class Review {
     @JsonBackReference
     private Doctor doctor;
 
+    @ManyToOne
+    @JoinColumn(name ="id_MedicalType",referencedColumnName = "id")
+    @JsonBackReference(value = "medical-type-reviews")
+    private  MedicalType medicalType;
+
     private  Integer rate;
 
     @Column(columnDefinition = "text")

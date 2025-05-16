@@ -12,11 +12,12 @@ import java.util.List;
 
 @Repository
 public interface DoctorRepository  extends JpaRepository<Doctor,Long> {
-
-
     @Query("SELECT d FROM Doctor d " +
             "WHERE (:name IS NULL OR LOWER(d.client.fullName) LIKE LOWER(CONCAT('%', :name, '%'))) " +
             "AND (:speciality IS NULL OR d.speciality.id = :speciality)")
     List<Doctor> findAllDoctorByNameAndSpeciality(@Param("name") String name,
                                                   @Param("speciality") Long idSpeciality);
+
+    @Query("SELECT count(*)  from  Doctor ")
+    Long countByDoctor();
 }

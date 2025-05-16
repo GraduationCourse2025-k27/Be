@@ -12,11 +12,12 @@ public class DoctorRequest {
     private String phone;
     private String address;
     private String email;
+    private  Double price;
 
     public DoctorRequest() {
     }
 
-    public DoctorRequest(String imagePath, String description,  LocalDateTime datetime, Long speciality, String fullName, String phone, String address, String email) {
+    public DoctorRequest(String imagePath, String description, LocalDateTime datetime, Long speciality, String fullName, String phone, String address, String email, Double price) {
         this.imagePath = imagePath;
         this.description = description;
         this.datetime = datetime;
@@ -25,6 +26,7 @@ public class DoctorRequest {
         this.phone = phone;
         this.address = address;
         this.email = email;
+        this.price = price;
     }
 
     public String getImagePath() {
@@ -89,5 +91,13 @@ public class DoctorRequest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

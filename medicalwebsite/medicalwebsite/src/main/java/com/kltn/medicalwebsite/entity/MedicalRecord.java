@@ -21,6 +21,8 @@ public class MedicalRecord {
     private Doctor doctor;
 
 
+    private String namePatient;
+
     private  String diagnosis;
     @Column(columnDefinition = "text")
     private  String prescription;
@@ -37,10 +39,11 @@ public class MedicalRecord {
     public MedicalRecord() {
     }
 
-    public MedicalRecord(Long id, Client client, Doctor doctor, String diagnosis, String prescription, String note, LocalDateTime birthDatePatient, String gender, LocalDateTime createdAt) {
+    public MedicalRecord(Long id, Client client, Doctor doctor, String namePatient, String diagnosis, String prescription, String note, LocalDateTime birthDatePatient, String gender, LocalDateTime createdAt) {
         this.id = id;
         this.client = client;
         this.doctor = doctor;
+        this.namePatient = namePatient;
         this.diagnosis = diagnosis;
         this.prescription = prescription;
         this.note = note;
@@ -119,5 +122,13 @@ public class MedicalRecord {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getNamePatient() {
+        return namePatient;
+    }
+
+    public void setNamePatient(String namePatient) {
+        this.namePatient = namePatient;
     }
 }

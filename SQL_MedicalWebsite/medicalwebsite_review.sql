@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `medicalwebsite` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `medicalwebsite`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: medicalwebsite
@@ -31,12 +29,15 @@ CREATE TABLE `review` (
   `rate` int DEFAULT NULL,
   `id_client` bigint DEFAULT NULL,
   `id_doctor` bigint DEFAULT NULL,
+  `id_medical_type` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK4o9h0elmafaddv63e9msal9at` (`id_client`),
   KEY `FKc4loycrmna5gt23qbhkex8nry` (`id_doctor`),
+  KEY `FKp07d82id3ckhjo6qu9eovy4dp` (`id_medical_type`),
   CONSTRAINT `FK4o9h0elmafaddv63e9msal9at` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`),
-  CONSTRAINT `FKc4loycrmna5gt23qbhkex8nry` FOREIGN KEY (`id_doctor`) REFERENCES `doctor` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FKc4loycrmna5gt23qbhkex8nry` FOREIGN KEY (`id_doctor`) REFERENCES `doctor` (`id`),
+  CONSTRAINT `FKp07d82id3ckhjo6qu9eovy4dp` FOREIGN KEY (`id_medical_type`) REFERENCES `medical_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +46,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (1,'Bác sĩ tận tâm, nhiệt tình , chu đáo','2025-05-09 04:46:33.773439',5,42,8),(2,'Chu đáo và nhiệt tình','2025-05-09 05:40:06.860893',4,42,8),(3,'Bác sĩ có tâm và có tầm','2025-05-09 06:27:35.485863',5,42,8),(4,'Bác sĩ này thật nhiệt tình ','2025-05-09 06:28:20.114760',3,42,8),(5,'Bác sĩ dễ thương và nhiệt tình','2025-05-09 06:42:04.458871',3,42,8),(6,'Bác sĩ thiện cảm và tận tâm','2025-05-09 06:43:43.011350',2,42,8);
+INSERT INTO `review` VALUES (7,'Chu đáo và nhiệt tình','2025-05-14 19:07:47.573414',5,42,23,NULL),(8,'Chu đáo và nhiệt tình','2025-05-14 19:08:01.672748',4,42,23,NULL),(9,'Chu đáo và nhiệt tình','2025-05-14 19:12:04.216530',4,42,22,NULL);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-10  1:18:34
+-- Dump completed on 2025-05-17  0:26:21

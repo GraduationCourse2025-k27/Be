@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `medicalwebsite` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `medicalwebsite`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: medicalwebsite
@@ -37,7 +35,7 @@ CREATE TABLE `doctor` (
   KEY `FKth8nc9mtk2799h5iesj6xp19l` (`id_speciality`),
   CONSTRAINT `FKn43q7dw2nkwrt0o4bwv7impu2` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`),
   CONSTRAINT `FKth8nc9mtk2799h5iesj6xp19l` FOREIGN KEY (`id_speciality`) REFERENCES `speciality` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +44,7 @@ CREATE TABLE `doctor` (
 
 LOCK TABLES `doctor` WRITE;
 /*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
-INSERT INTO `doctor` VALUES (1,'2025-04-12 16:02:56.087095','nhiet huyet tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-han-van-ba_2.png',1,2,300000),(2,'2025-04-12 15:40:54.922446','Tận tâm nhiệt huyết','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-nguyen-trung-chinh_4.png',3,2,100000),(3,'2025-04-28 01:29:12.672577','nhiet huyet tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-han-van-ba_2.png',6,2,400000),(4,'2025-04-20 16:57:39.262852','nhiet huyet, tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-nguyen-trung-chinh_4.png',7,8,500000),(5,'2025-04-20 16:59:23.971743','nhiet huyet, tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-nguyen-trung-chinh_4.png',10,10,50000),(6,'2025-04-20 16:59:34.435849','nhiet huyet, tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-nguyen-trung-chinh_4.png',21,7,50000),(7,'2025-04-20 16:59:44.700533','nhiet huyet, tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-nguyen-trung-chinh_4.png',30,1,50000),(8,'2025-04-20 17:00:07.015535','nhiet huyet, tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-nguyen-trung-chinh_4.png',33,6,50000),(9,'2025-04-20 17:00:16.133102','nhiet huyet, tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-nguyen-trung-chinh_4.png',25,6,50000),(10,'2025-04-22 10:46:54.611440','nhiet huyet, tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-nguyen-trung-chinh_4.png',14,8,50000),(12,'2025-04-27 18:07:34.962841','nhiet huyet, tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-nguyen-trung-chinh_4.png',40,8,50000);
+INSERT INTO `doctor` VALUES (10,'2025-05-14 21:11:04.895879','nhiet huyet, tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-nguyen-trung-chinh_4.png',14,8,460000),(14,'2025-05-14 14:24:10.582704','Bác sĩ tận tâm và có tầm','https://www.publicdomainpictures.net/pictures/210000/velka/doctor-1490804643Rfi.jpg',28,9,4578901),(15,'2025-05-14 14:24:51.587351','Bác sĩ tận tâm và nhiệt tình','https://th.bing.com/th/id/OIP.uUAvdBlqLXVZ0KjzM2XqOQHaLG?cb=iwp2&w=1280&h=1919&rs=1&pid=ImgDetMain',17,6,750000),(19,'2025-05-14 14:36:35.892191','Tận Tâm','https://thumbs.dreamstime.com/b/medicine-doctor-22930037.jpg',35,7,203356),(22,'2025-05-14 17:46:58.047168','Bác sĩ tận tâm và có tầm','https://th.bing.com/th/id/OIP.qNSiJ7PqVb9R24N0D_4bewHaNK?cb=iwp2&rs=1&pid=ImgDetMain',4,2,50000),(23,'2025-05-14 18:13:08.804406','nhiet huyet tan tam','https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/500x0/bs-nguyen-trung-chinh_4.png',15,6,203356),(25,'2025-05-14 21:11:28.350463','Bác sĩ tận tâm và có tầm','https://th.bing.com/th/id/OIP.zozvUUvD02QucYPrUlSnlgHaJP?cb=iwp2&rs=1&pid=ImgDetMain',11,3,750000),(26,'2025-05-14 22:16:57.522373','Bác sĩ tận tâm và có tầm','https://th.bing.com/th/id/OIP.YBVrGLcv7AmVtB4z_PmedwHaHa?cb=iwp2&w=2000&h=2000&rs=1&pid=ImgDetMain',31,13,750000),(28,'2025-05-15 23:35:21.436714','Bác sĩ tận tâm và có tầm','https://cdn.bookingcare.vn/fo/w256/2019/12/31/155650-gs-ha-van-quyet.jpg',41,13,500000),(29,'2025-05-16 04:46:45.231337','Bác sĩ tận tâm và có tầm','https://cdn.medpro.vn/prod-partner/3580f6dc-bc34-4624-ac47-b4add9138d39-aaoaa_n_thaaa_baach_vaacentn.png?w=3840&q=75',8,8,500000),(30,'2025-05-16 17:00:53.410316','Bác sĩ tận tâm và có tầm','https://cdn.medpro.vn/prod-partner/fed8b62f-6f24-46bf-bfd4-7378a6bee398-bs_vaa(c)_aaaanh_khaai.png?w=1920&q=75',38,8,500000);
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-10  1:18:34
+-- Dump completed on 2025-05-17  0:26:22

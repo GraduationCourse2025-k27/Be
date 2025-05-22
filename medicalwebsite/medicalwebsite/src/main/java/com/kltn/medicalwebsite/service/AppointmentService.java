@@ -19,9 +19,9 @@ public interface AppointmentService {
     List<Appointment> findAllAppointmentForPending(String email);
     List<Appointment> findAllAppointmentForConfirm(String email);
     List<MyAppointmentResponse> findAllAppointmentByEmail(String email);
-
     List<Appointment> findAllAppointment();
     void deleteUnpaidAppointments();
-
     Map<String, Object> getCurrentYearStats();
+
+    List<Appointment> getConfirmedAppointmentsByDoctorId(Long doctorId);
 }

@@ -1,6 +1,7 @@
 package com.kltn.medicalwebsite.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class New {
 
     @ManyToOne
     @JoinColumn(name = "id_customersupport",referencedColumnName = "id")
+    @JsonBackReference
     private CustomerSupport customerSupport;
 
     private  String title;
@@ -22,17 +24,20 @@ public class New {
     @Column(columnDefinition = "text")
     private  String content;
 
+    private  String imagePath ;
+
     private LocalDateTime publisherAt;
 
 
     public New() {
     }
 
-    public New(Long id, CustomerSupport customerSupport, String title, String content, LocalDateTime publisherAt) {
+    public New(Long id, CustomerSupport customerSupport, String title, String content, String imagePath, LocalDateTime publisherAt) {
         this.id = id;
         this.customerSupport = customerSupport;
         this.title = title;
         this.content = content;
+        this.imagePath = imagePath;
         this.publisherAt = publisherAt;
     }
 
@@ -74,5 +79,13 @@ public class New {
 
     public void setPublisherAt(LocalDateTime publisherAt) {
         this.publisherAt = publisherAt;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

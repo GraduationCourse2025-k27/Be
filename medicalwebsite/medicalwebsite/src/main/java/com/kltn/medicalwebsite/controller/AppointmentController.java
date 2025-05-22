@@ -118,5 +118,15 @@ public class AppointmentController {
         }
     }
 
+    @GetMapping("/confirmed/doctor/{doctorId}")
+    public  ResponseEntity<List<Appointment>> getConfirmedAppointments(@PathVariable("") Long doctorId){
+        List<Appointment> appointmentsByDoctorId = appointmentService.getConfirmedAppointmentsByDoctorId(doctorId);
+        if(appointmentsByDoctorId.isEmpty()){
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            return  new ResponseEntity<>(appointmentsByDoctorId,HttpStatus.OK);
+        }
+    }
+
 
 }

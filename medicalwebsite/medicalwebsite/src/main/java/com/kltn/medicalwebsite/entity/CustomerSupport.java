@@ -1,6 +1,7 @@
 package com.kltn.medicalwebsite.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ public class CustomerSupport {
     private  String imagePath;
 
     @OneToMany(mappedBy = "customerSupport",cascade = CascadeType.REMOVE)
+    @JsonManagedReference
     private List<New> news;
 
     @ManyToOne
@@ -29,8 +31,10 @@ public class CustomerSupport {
     public CustomerSupport() {
     }
 
-    public CustomerSupport(Long id, String name, String phone, String address, String password) {
+    public CustomerSupport(Long id, String name, String phone, String address, String password, String imagePath, Client client) {
         this.id = id;
+        this.imagePath = imagePath;
+        this.client = client;
     }
 
     public Long getId() {
@@ -41,5 +45,19 @@ public class CustomerSupport {
         this.id = id;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
 
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 }

@@ -91,4 +91,12 @@ public class ClientServiceImlp  implements  ClientService{
         clients = clients.stream().sorted(Comparator.comparing(Client::getId).reversed()).collect(Collectors.toList());
         return clients;
     }
+
+    @Override
+    public List<Client> findByFullNameContainingIgnoreCaseOrFullNameIsNull(String fullName) {
+        List<Client> clients = repository.findByFullName(fullName);
+            clients = clients.stream().sorted(Comparator.comparing(Client::getId).reversed()).collect(Collectors.toList());
+
+        return clients;
+    }
 }

@@ -24,4 +24,6 @@ public interface ClientRepository  extends JpaRepository<Client,Long> {
     @Query("Select c from Client c where c.role ='ROLE_USER'")
     List<Client> getAllClientByRoleUser();
 
+    @Query("SELECT c FROM Client c WHERE :fullName IS NULL OR :fullName = '' OR LOWER(c.fullName) LIKE LOWER(CONCAT('%', :fullName, '%'))")
+    List<Client> findByFullName(String fullName);
 }

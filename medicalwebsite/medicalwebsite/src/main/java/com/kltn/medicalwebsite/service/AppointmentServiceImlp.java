@@ -3,6 +3,7 @@ package com.kltn.medicalwebsite.service;
 import com.kltn.medicalwebsite.entity.*;
 import com.kltn.medicalwebsite.exception.AppointmentException;
 import com.kltn.medicalwebsite.exception.ConsultationException;
+import com.kltn.medicalwebsite.exception.DoctorException;
 import com.kltn.medicalwebsite.repository.*;
 import com.kltn.medicalwebsite.request.AppointmentRequest;
 import com.kltn.medicalwebsite.response.MyAppointmentResponse;
@@ -31,12 +32,15 @@ public class AppointmentServiceImlp implements AppointmentService {
 
     private  AppointmentCancellationRepository appointmentCancellationRepository;
 
-    public AppointmentServiceImlp(AppointmentRepository appointmentRepository, ConsultationScheduleRepository consultationScheduleRepository, PaymentRepository paymentRepository, EmailSenderService emailSenderService, AppointmentCancellationRepository appointmentCancellationRepository) {
+    private  DoctorRepository doctorRepository;
+
+    public AppointmentServiceImlp(AppointmentRepository appointmentRepository, ConsultationScheduleRepository consultationScheduleRepository, PaymentRepository paymentRepository, EmailSenderService emailSenderService, AppointmentCancellationRepository appointmentCancellationRepository, DoctorRepository doctorRepository) {
         this.appointmentRepository = appointmentRepository;
         this.consultationScheduleRepository = consultationScheduleRepository;
         this.paymentRepository = paymentRepository;
         this.emailSenderService = emailSenderService;
         this.appointmentCancellationRepository = appointmentCancellationRepository;
+        this.doctorRepository = doctorRepository;
     }
 
     @Override
@@ -212,6 +216,18 @@ public class AppointmentServiceImlp implements AppointmentService {
         result.put("monthlyStats",monthlyStats);
         result.put("quarterlyStats",quarterlyStats);
         return  result;
+    }
+
+    @Override
+    public List<Appointment> getConfirmedAppointmentsByDoctorId(Long doctorId) {
+        Optional<Doctor> doctor = doctorRepository.findById(doctorId);
+        if(doctor.isPresent()){
+            List<ConsultationSchedule> schedules = consultationScheduleRepository.findByDoctorId(doctorId);
+            return  schedules.stream().flatMap(schedule -> appointmentRepository.findByConsulationScheduleAndStatus(schedule,"CONFIRMED").stream()).collect(Collectors.toList());
+        }else {
+            throw  new DoctorException("not found with doctor id :"+doctorId);
+        }
+
     }
 
 

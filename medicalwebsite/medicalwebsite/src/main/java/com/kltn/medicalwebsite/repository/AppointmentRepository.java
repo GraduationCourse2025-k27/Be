@@ -1,6 +1,7 @@
 package com.kltn.medicalwebsite.repository;
 
 import com.kltn.medicalwebsite.entity.Appointment;
+import com.kltn.medicalwebsite.entity.ConsultationSchedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,7 @@ public interface AppointmentRepository  extends JpaRepository<Appointment,Long> 
             "FROM Appointment a " +
             "GROUP BY a.consulationSchedule.medicalType.id, a.consulationSchedule.medicalType.nameService")
     List<Object[]> countAppointmentsByMedicalType();
+
+    List<Appointment> findByConsulationScheduleAndStatus(ConsultationSchedule consultationSchedule,String status);
+
 }

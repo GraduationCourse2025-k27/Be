@@ -30,7 +30,7 @@ CREATE TABLE `medical_type` (
   `price` double DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `medical_type` (
 
 LOCK TABLES `medical_type` WRITE;
 /*!40000 ALTER TABLE `medical_type` DISABLE KEYS */;
-INSERT INTO `medical_type` VALUES (4,'2025-04-22 10:49:37.475501',' Tổng quát ','https://th.bing.com/th/id/OIP.CkSM5kBhfDxzJrNydhEJCwHaE8?rs=1&pid=ImgDetMain',50000,'giúp bạn đánh giá toàn diện tình trạng sức khỏe hiện tại thông qua các xét nghiệm'),(6,'2025-05-16 17:05:46.451020',' Xét nghiệm ','https://th.bing.com/th/id/OIP.K50IY76qO58qnn0iaD5XPgHaE7?rs=1&pid=ImgDetMain',600000,'giúp bạn đánh giá toàn diện tình trạng sức khỏe hiện tại thông qua các xét nghiệm'),(9,'2025-04-22 10:52:23.145777',' Phẫu Thuật ','https://th.bing.com/th/id/OIP.geSd-IB9ly5BE---0BgHjQHaEK?rs=1&pid=ImgDetMain',50000,'giúp bạn đánh giá toàn diện tình trạng sức khỏe hiện tại thông qua các xét nghiệm'),(13,'2025-04-22 10:55:00.817555',' Siêu âm ','https://th.bing.com/th/id/OIP.T9Zbv5f6fRxe9XrgPXbmrQHaFW?w=1600&h=1157&rs=1&pid=ImgDetMain',50000,'giúp bạn đánh giá toàn diện tình trạng sức khỏe hiện tại thông qua các xét nghiệm'),(14,'2025-05-17 00:14:35.821592',' Ung thư ','https://th.bing.com/th/id/OIP.fGTe_eZxF2k96c-dxsZpngHaFz?rs=1&pid=ImgDetMain',50000,'giúp bạn đánh giá toàn diện tình trạng sức khỏe hiện tại thông qua các xét nghiệm');
+INSERT INTO `medical_type` VALUES (4,'2025-04-22 10:49:37.475501',' Tổng quát ','https://th.bing.com/th/id/OIP.CkSM5kBhfDxzJrNydhEJCwHaE8?rs=1&pid=ImgDetMain',50000,'giúp bạn đánh giá toàn diện tình trạng sức khỏe hiện tại thông qua các xét nghiệm'),(6,'2025-05-16 17:05:46.451020',' Xét nghiệm ','https://th.bing.com/th/id/OIP.K50IY76qO58qnn0iaD5XPgHaE7?rs=1&pid=ImgDetMain',600000,'giúp bạn đánh giá toàn diện tình trạng sức khỏe hiện tại thông qua các xét nghiệm'),(9,'2025-05-22 15:53:45.977419',' Phẫu Thuật ','https://th.bing.com/th/id/OIP.geSd-IB9ly5BE---0BgHjQHaEK?rs=1&pid=ImgDetMain',600000,'giúp bạn đánh giá toàn diện tình trạng sức khỏe hiện tại thông qua các xét nghiệm'),(13,'2025-05-22 21:24:15.402773','Siêu Âm','https://th.bing.com/th/id/OIP.T9Zbv5f6fRxe9XrgPXbmrQHaFW?w=1600&h=1157&rs=1&pid=ImgDetMain',60000,'giúp bạn đánh giá toàn diện tình trạng sức khỏe hiện tại thông qua các xét nghiệm'),(14,'2025-05-18 15:39:00.625080',' Ung thư ','https://th.bing.com/th/id/OIP.fGTe_eZxF2k96c-dxsZpngHaFz?rs=1&pid=ImgDetMain',1000000,'giúp bạn đánh giá toàn diện tình trạng sức khỏe hiện tại thông qua các xét nghiệm');
 /*!40000 ALTER TABLE `medical_type` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-17  0:26:22
+-- Dump completed on 2025-05-22 21:33:05

@@ -2,6 +2,7 @@ package com.kltn.medicalwebsite.controller;
 
 
 import com.kltn.medicalwebsite.entity.Client;
+import com.kltn.medicalwebsite.repository.ClientRepository;
 import com.kltn.medicalwebsite.request.ClientRequest;
 import com.kltn.medicalwebsite.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
+
+    @Autowired
+    private ClientRepository clientRepository;
 
     public ClientController(ClientService clientService) {
         this.clientService = clientService;
@@ -79,6 +83,35 @@ public class ClientController {
             }
         }catch (Exception e){
              return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @PutMapping("/{id}/lock")
+    public ResponseEntity<String> lockAccount(@PathVariable Long id){
+        Client client = clientService.findClientById(id);
+
+        client.setClock(true);
+        clientRepository.save(client);
+        return  ResponseEntity.ok("Tài khoản với ID:"+id+"Đã bị khóa");
+    }
+
+    @PutMapping("/{id}/unlock")
+    public ResponseEntity<String> unLockAccount(@PathVariable Long id){
+        Client client = clientService.findClientById(id);
+
+        client.setClock(false);
+        clientRepository.save(client);
+        return  ResponseEntity.ok("Tài khoản với ID:"+id+"Đã mở khóa");
+    }
+
+    @GetMapping("/getAccounts")
+    public  ResponseEntity<List<Client>> getAccountsByName(@RequestParam(value = "fullName",required = false)String name){
+        List<Client> clients = clientService.findByFullNameContainingIgnoreCaseOrFullNameIsNull(name);
+        if(clients.isEmpty()){
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            return  new ResponseEntity<>(clients,HttpStatus.OK);
         }
     }
 

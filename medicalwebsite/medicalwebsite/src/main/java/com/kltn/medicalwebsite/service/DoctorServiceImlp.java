@@ -68,6 +68,7 @@ public class DoctorServiceImlp implements  DoctorService{
     }
 
     @Override
+    @Transactional
     public Doctor update(DoctorRequest doctor, Long id) {
         Optional<Doctor> existingDoctor = doctorRepository.findById(id);
         Optional<Speciality> existingSpeciality = specialityRepository.findById(doctor.getSpeciality());
@@ -145,4 +146,6 @@ public class DoctorServiceImlp implements  DoctorService{
             throw  new DoctorException("doctor not found with id :"+id);
         }
     }
+
+
 }

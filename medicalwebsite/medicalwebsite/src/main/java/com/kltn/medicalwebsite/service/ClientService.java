@@ -14,8 +14,6 @@ public interface ClientService {
 
     void updateClient(ClientRequest client , Long id);
 
-    Client login(LoginRequest client);
-
     Client findClientByEmail(String email);
     Client findClientById(Long id);
 

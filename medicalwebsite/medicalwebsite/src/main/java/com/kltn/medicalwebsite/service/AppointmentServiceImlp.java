@@ -88,7 +88,7 @@ public class AppointmentServiceImlp implements AppointmentService {
         Optional<Payment> payment = paymentRepository.findFirstByAppointment(appointment);
         appointmentCancellation appointmentCancellation = new appointmentCancellation();
         long minutesDifference = ChronoUnit.MINUTES.between(appointmentTime,now);
-        if(minutesDifference <= 45){
+        if(minutesDifference <= 10){
             ConsultationSchedule consultationSchedule = consultationScheduleRepository.
                     findById(appointment.getConsulationSchedule().getId()).
                     orElseThrow(() -> new AppointmentException("Schedule not found with id:" + appointment.getConsulationSchedule().getId()));
@@ -102,7 +102,9 @@ public class AppointmentServiceImlp implements AppointmentService {
             consultationScheduleRepository.save(consultationSchedule);
             appointmentRepository.save(appointment);
             paymentRepository.save(payment.get());
-            appointmentCancellationRepository.save(appointmentCancellation);
+            if(payment.get().getTypePayment().equals("VnPay")){
+                appointmentCancellationRepository.save(appointmentCancellation);
+            }
             return  true;
         }else  {
             return  false;
@@ -179,8 +181,8 @@ public class AppointmentServiceImlp implements AppointmentService {
     @Scheduled(fixedRate = 60000)
     @Transactional
     public void deleteUnpaidAppointments() {
-        LocalDateTime fiveMinutesAgo = LocalDateTime.now().minusMinutes(5);
-        List<Appointment> unpaidAppointments = appointmentRepository.findByPaymentsIsEmptyAndDateAppointmentBefore(fiveMinutesAgo);
+        LocalDateTime tenMinutesAgo = LocalDateTime.now().minusMinutes(5);
+        List<Appointment> unpaidAppointments = appointmentRepository.findByPaymentsIsEmptyAndDateAppointmentBefore(tenMinutesAgo);
         for (Appointment appointment : unpaidAppointments){
             Optional<ConsultationSchedule> consultationSchedule = consultationScheduleRepository.findById(appointment.getConsulationSchedule().getId());
              if(consultationSchedule.isPresent()){

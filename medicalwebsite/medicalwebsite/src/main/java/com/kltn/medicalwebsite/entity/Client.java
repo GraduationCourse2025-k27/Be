@@ -25,7 +25,6 @@ public class Client {
 
     private  String address;
 
-    @Column(columnDefinition = "varchar(20)")
     private String password;
 
     @Column(columnDefinition = "varchar(50)")

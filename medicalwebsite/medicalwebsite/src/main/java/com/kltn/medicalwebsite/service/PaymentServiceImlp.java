@@ -42,6 +42,7 @@ public class PaymentServiceImlp implements PaymentService {
             payment.setAppointment(exsitAppointment.get());
             payment.setAmount(amount);
             payment.setStatus("PENDING");
+            payment.setTypePayment("cash");
             payment.setDatePayment(LocalDateTime.now());
             return paymentRepository.save(payment);
         } else {

@@ -1,6 +1,7 @@
 package com.kltn.medicalwebsite.repository;
 
 
+import com.kltn.medicalwebsite.entity.Client;
 import com.kltn.medicalwebsite.entity.Doctor;
 import com.kltn.medicalwebsite.entity.Speciality;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,4 +21,6 @@ public interface DoctorRepository  extends JpaRepository<Doctor,Long> {
 
     @Query("SELECT count(*)  from  Doctor ")
     Long countByDoctor();
+
+    Doctor findByClient(Client client);
 }

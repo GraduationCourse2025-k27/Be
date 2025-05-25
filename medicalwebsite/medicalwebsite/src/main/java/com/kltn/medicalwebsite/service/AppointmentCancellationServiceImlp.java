@@ -20,8 +20,10 @@ public class AppointmentCancellationServiceImlp implements  AppointmentCancellat
 
     @Override
     public List<appointmentCancellation> getAllAppointmentCancellation() {
-        List<appointmentCancellation> cancellations = cancellationRepository.findAll();
-        cancellations = cancellations.stream().sorted(Comparator.comparing(appointmentCancellation::getId).reversed()).collect(Collectors.toList());
-        return cancellations;
+        return cancellationRepository.findAll()
+                .stream()
+                .filter(c -> c.getPayment() != null && "VnPay".equals(c.getPayment().getTypePayment()))
+                .sorted(Comparator.comparing(appointmentCancellation::getId).reversed())
+                .collect(Collectors.toList());
     }
 }

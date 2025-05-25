@@ -31,7 +31,7 @@ CREATE TABLE `appointment_cancellation` (
   PRIMARY KEY (`id`),
   KEY `FK12a4bbl6q9iiffbka71phfpt0` (`id_payment`),
   CONSTRAINT `FK12a4bbl6q9iiffbka71phfpt0` FOREIGN KEY (`id_payment`) REFERENCES `payment` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `appointment_cancellation` (
 
 LOCK TABLES `appointment_cancellation` WRITE;
 /*!40000 ALTER TABLE `appointment_cancellation` DISABLE KEYS */;
-INSERT INTO `appointment_cancellation` VALUES (12,'2025-05-16 23:49:07.084013','Appointment Cancel',43,2289450.5),(13,'2025-05-17 23:40:24.337829','Appointment Cancel',44,250000),(14,'2025-05-17 23:40:27.423389','Appointment Cancel',45,250000);
+INSERT INTO `appointment_cancellation` VALUES (19,'2025-05-25 17:14:50.594969','Appointment Cancel',81,250000),(20,'2025-05-25 17:14:51.959320','Appointment Cancel',80,75000),(21,'2025-05-25 17:14:54.316873','Appointment Cancel',79,25000),(22,'2025-05-25 17:19:19.572177','Appointment Cancel',78,25000),(23,'2025-05-25 17:20:16.887770','Appointment Cancel',85,25000),(24,'2025-05-26 01:19:12.054275','Appointment Cancel',101,25000);
 /*!40000 ALTER TABLE `appointment_cancellation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-22 21:33:05
+-- Dump completed on 2025-05-26  1:53:08

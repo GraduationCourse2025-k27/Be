@@ -83,6 +83,7 @@ public class PaymentController {
             payment.setVnPayLinkReferenceId(vnp_TransactionNo);
             payment.setVnPayLinkStatus(vnp_TransactionStatus);
             payment.setDatePayment(LocalDateTime.now());
+            payment.setTypePayment("VnPay");
             appointmentRepository.save(appointment);
             paymentRepository.save(payment);
             ApiResponse apiResponse = new ApiResponse();

@@ -37,7 +37,7 @@ CREATE TABLE `review` (
   CONSTRAINT `FK4o9h0elmafaddv63e9msal9at` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`),
   CONSTRAINT `FKc4loycrmna5gt23qbhkex8nry` FOREIGN KEY (`id_doctor`) REFERENCES `doctor` (`id`),
   CONSTRAINT `FKp07d82id3ckhjo6qu9eovy4dp` FOREIGN KEY (`id_medical_type`) REFERENCES `medical_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (7,'Chu đáo và nhiệt tình','2025-05-14 19:07:47.573414',5,42,23,NULL),(8,'Chu đáo và nhiệt tình','2025-05-14 19:08:01.672748',4,42,23,NULL),(9,'Chu đáo và nhiệt tình','2025-05-14 19:12:04.216530',4,42,22,NULL);
+INSERT INTO `review` VALUES (7,'Chu đáo và nhiệt tình','2025-05-14 19:07:47.573414',5,42,23,NULL),(8,'Chu đáo và nhiệt tình','2025-05-14 19:08:01.672748',4,42,23,NULL),(9,'Chu đáo và nhiệt tình','2025-05-14 19:12:04.216530',4,42,22,NULL),(10,'Bác sĩ tận tâm và tận tình,Chu đáo trong việc chăm sóc bệnh nhân','2025-05-25 15:20:10.170414',5,71,28,NULL),(11,'Lâu rồi tôi mới thấy một bác sĩ nhiệt tình như thế','2025-05-25 15:20:26.490000',4,71,28,NULL),(12,'Tôi cũng thấy bác sĩ này nhiệt tình chăm sóc bênh nhân','2025-05-25 15:24:39.764159',5,26,28,NULL),(13,'Kham tot','2025-05-26 01:42:14.748859',5,79,29,NULL);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-22 21:33:05
+-- Dump completed on 2025-05-26  1:53:08

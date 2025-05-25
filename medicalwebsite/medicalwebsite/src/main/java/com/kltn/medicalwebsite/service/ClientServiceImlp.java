@@ -59,10 +59,7 @@ public class ClientServiceImlp  implements  ClientService{
         }
     }
 
-    @Override
-    public Client login(LoginRequest client) {
-        return null;
-    }
+
 
     @Override
     public Client findClientByEmail(String email) {

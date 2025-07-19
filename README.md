@@ -40,26 +40,45 @@
 ## DIRECTORY STRUCTURE
 
 ├───main
+
 │   ├───java
+
 │   │   └───com
+
 │   │       └───kltn
+
 │   │           └───medicalwebsite
+
 │   │               ├───controller
+
 │   │               ├───entity
+
 │   │               ├───exception
+
 │   │               ├───repository
+
 │   │               ├───request
+
 │   │               ├───response
+
 │   │               ├───service
+
 │   │               ├───util
+
 │   │               └───webconfig
 │   └───resources
+
 │       ├───static
+
 │       └───templates
 └───test
+
     └───java
+    
         └───com
+        
             └───kltn
+            
                 └───medicalwebsite
 
 ## GET STARTED

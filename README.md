@@ -10,7 +10,7 @@
 ## TEAM SIZE
 
 - 5 developer:
-- 
+
 -Ho Phuc Tam
 
 -Le Minh Dung
@@ -78,9 +78,13 @@
 │       └───templates
 
 └───test
+
     └───java
+    
         └───com
+        
             └───kltn
+            
                 └───medicalwebsite
 
 ## GET STARTED

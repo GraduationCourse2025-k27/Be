@@ -10,10 +10,15 @@
 ## TEAM SIZE
 
 - 5 developer:
+- 
 -Ho Phuc Tam
+
 -Le Minh Dung
+
 -Nguyen Tan Tai
+
 -Nguyen Duc Hung
+
 -Nguyen Thanh Nam
 
 ## TARGETs
@@ -71,14 +76,11 @@
 │       ├───static
 
 │       └───templates
-└───test
 
+└───test
     └───java
-    
         └───com
-        
             └───kltn
-            
                 └───medicalwebsite
 
 ## GET STARTED
